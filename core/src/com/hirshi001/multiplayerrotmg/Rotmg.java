@@ -28,7 +28,7 @@ public class Rotmg extends ApplicationAdapter {
 		/* create spritebatch */
 		batch = new SpriteBatch();
 
-		/* create game*/
+		/* create game application*/
 		gameApplication = new GameApplication();
 		try {
 			gameApplication.init();
