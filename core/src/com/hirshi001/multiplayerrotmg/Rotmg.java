@@ -21,7 +21,6 @@ public class Rotmg extends ApplicationAdapter {
 
 	@Override
 	public void create () {
-		//
 		/* Create OrthographicCamera */
 		camera = new OrthographicCamera(size.width, size.height);
 
