@@ -15,7 +15,7 @@ public abstract class Entity {
     public abstract Chunk getChunk();
     public abstract void setChunk(Chunk chunk);
 
-    public abstract void write(List<ByteBuf> out);
+    public abstract void write(ByteBuf out);
     public abstract void read(ByteBuf in);
 
 }
