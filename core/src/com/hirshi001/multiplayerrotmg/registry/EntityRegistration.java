@@ -2,6 +2,11 @@ package com.hirshi001.multiplayerrotmg.registry;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ *
+ * @param <T>
+ *     Used for wrapping the initialization method of an Entity type for registrating in a Registry
+ */
 public class EntityRegistration<T>{
 
     public static <E> EntityRegistration<E> registerEntity(EntityCreator<E> ec){

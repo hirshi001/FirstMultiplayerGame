@@ -6,7 +6,7 @@ import com.hirshi001.multiplayerrotmg.gamepieces.Entity;
 /**
  *
  * @param <T>
- *     This object is used for registering classes and instantiating objects from those classes
+ *     This object is used for registering objects
  */
 public abstract class Registry<T> {
 
