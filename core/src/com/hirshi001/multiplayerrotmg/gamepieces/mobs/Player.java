@@ -152,8 +152,15 @@ public class Player extends MobEntity {
         }
     }
 
+    @Override
+    public void write(ByteBuf out) {
+        super.write(out);
+        out.writeBoolean(facingRight);
+    }
 
-
-
-
+    @Override
+    public void read(ByteBuf in) {
+        super.read(in);
+        facingRight = in.readBoolean();
+    }
 }

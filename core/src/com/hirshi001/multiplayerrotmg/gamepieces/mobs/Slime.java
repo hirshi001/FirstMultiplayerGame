@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
 import com.hirshi001.multiplayerrotmg.field.Block;
+import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
 import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
 import com.hirshi001.multiplayerrotmg.util.animation.AnimationCycle;
 import com.hirshi001.multiplayerrotmg.util.animation.Animator;
@@ -25,8 +26,8 @@ public class Slime extends MobEntity {
     static{
         t1 = new Texture("textures/entities/mobs/slime/slimeIdle1.png");
         t2 = new Texture("textures/entities/mobs/slime/slimeIdle2.png");
-        EntityRegistry.addDisposable(t1);
-        EntityRegistry.addDisposable(t2);
+        DisposableRegistry.addDisposable(t1);
+        DisposableRegistry.addDisposable(t2);
     }
 
     private AnimationCycle cycle = new AnimationCycle(new Animator(new TextureRegion[]{
@@ -111,15 +112,4 @@ public class Slime extends MobEntity {
         }
         facingRight = getCenterPosition().x<getMaster().getCenterPosition().x;
     }
-
-    @Override
-    public void set(ByteBuf buffer) {
-        float x = buffer.readFloat();
-        float y = buffer.readFloat();
-        this.position.set(x,y);
-        setHealth(buffer.readInt());
-    }
-
-
-
 }

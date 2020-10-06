@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
+import com.hirshi001.multiplayerrotmg.registry.BlockRegistry;
 import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
 
 import java.util.LinkedList;
@@ -36,7 +37,7 @@ public class Chunk {
 
         for(r=0;r<tiles.length;r++){
             for(c=0;c<tiles.length;c++){
-                batch.draw(EntityRegistry.getBlock(tiles[r][c]).getTexture(),chunkPosCol + c  * Block.BLOCKHEIGHT,chunkPosRow+ r * Block.BLOCKHEIGHT);
+                batch.draw(BlockRegistry.BLOCK_REGISTRY.getObject(tiles[r][c]).getTexture(),chunkPosCol + c  * Block.BLOCKHEIGHT,chunkPosRow+ r * Block.BLOCKHEIGHT);
             }
         }
     }

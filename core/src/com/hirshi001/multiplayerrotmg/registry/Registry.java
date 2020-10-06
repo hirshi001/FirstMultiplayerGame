@@ -10,6 +10,11 @@ import com.hirshi001.multiplayerrotmg.gamepieces.Entity;
  */
 public abstract class Registry<T> {
 
+
+
+
+
+
     /**
      *
      * @param object
