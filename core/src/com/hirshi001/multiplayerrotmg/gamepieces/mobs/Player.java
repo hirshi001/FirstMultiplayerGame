@@ -13,7 +13,7 @@ import com.hirshi001.multiplayerrotmg.client.packet.packethandlers.UseInventoryI
 import com.hirshi001.multiplayerrotmg.gamepieces.inventory.Inventory;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.Bullet;
-import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.GameProjectile;
+import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 import com.hirshi001.multiplayerrotmg.field.Block;
 import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
 import com.hirshi001.multiplayerrotmg.registry.InventoryItemRegistry;
@@ -21,7 +21,7 @@ import com.hirshi001.multiplayerrotmg.util.animation.AnimationCycle;
 import com.hirshi001.multiplayerrotmg.util.animation.Animator;
 import io.netty.buffer.ByteBuf;
 
-public class Player extends GameMob {
+public class Player extends MobEntity {
 
 
     public static final float WIDTH = 12f/ Block.BLOCKWIDTH, HEIGHT = 12f/Block.BLOCKHEIGHT;
@@ -119,12 +119,12 @@ public class Player extends GameMob {
     }
 
     @Override
-    public GameMob applyDamage(int damage, GameProjectile source) {
+    public MobEntity applyDamage(int damage, ProjectileEntity source) {
         return this;
     }
 
     @Override
-    protected void onMobCollision(GameMob e) {
+    protected void onMobCollision(MobEntity e) {
         if(!(e instanceof Slime)){
             super.onMobCollision(e);
         }

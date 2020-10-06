@@ -3,7 +3,7 @@ package com.hirshi001.multiplayerrotmg.gamepieces.projecticles;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.hirshi001.multiplayerrotmg.gamepieces.mobs.GameMob;
+import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.projectiletypes.StraightLineProjectile;
 import com.hirshi001.multiplayerrotmg.field.Block;
 import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
@@ -36,7 +36,7 @@ public class Fireball extends StraightLineProjectile {
     }
 
     @Override
-    public void onTouchingMob(GameMob m) {  }
+    public void onTouchingMob(MobEntity m) {  }
 
     @Override
     public float getWidth() {

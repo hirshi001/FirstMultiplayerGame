@@ -1,9 +1,9 @@
 package com.hirshi001.multiplayerrotmg.field;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.hirshi001.multiplayerrotmg.gamepieces.mobs.GameMob;
+import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
-import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.GameProjectile;
+import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
 
 import java.util.LinkedList;
@@ -15,9 +15,9 @@ public class Chunk {
     private short[][] tiles;
     private int row, col;
 
-    private final List<GameMob> mobs = new LinkedList<>();
+    private final List<MobEntity> mobs = new LinkedList<>();
 
-    private final List<GameProjectile> projectiles = new LinkedList<>();
+    private final List<ProjectileEntity> projectiles = new LinkedList<>();
 
     private final List<ItemEntity> items = new LinkedList<>();
 
@@ -41,13 +41,13 @@ public class Chunk {
         }
     }
 
-    public void addMob(GameMob m){ mobs.add(m);}
-    public void removeMob(GameMob m) {mobs.remove(m);}
-    public List<GameMob> getMobs(){return mobs;}
+    public void addMob(MobEntity m){ mobs.add(m);}
+    public void removeMob(MobEntity m) {mobs.remove(m);}
+    public List<MobEntity> getMobs(){return mobs;}
 
-    public void addProjectile(GameProjectile p){ projectiles.add(p);}
-    public void removeProjectile(GameProjectile p) {projectiles.remove(p);}
-    public List<GameProjectile> getProjectiles(){return projectiles;}
+    public void addProjectile(ProjectileEntity p){ projectiles.add(p);}
+    public void removeProjectile(ProjectileEntity p) {projectiles.remove(p);}
+    public List<ProjectileEntity> getProjectiles(){return projectiles;}
 
     public void addItem(ItemEntity i){ items.add(i);}
     public void removeItem(ItemEntity i) {items.remove(i);}

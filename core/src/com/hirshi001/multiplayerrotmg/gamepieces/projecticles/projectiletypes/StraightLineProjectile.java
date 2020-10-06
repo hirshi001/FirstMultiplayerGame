@@ -1,10 +1,9 @@
 package com.hirshi001.multiplayerrotmg.gamepieces.projecticles.projectiletypes;
 
 import com.badlogic.gdx.math.Vector2;
-import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.GameProjectile;
-import io.netty.buffer.ByteBuf;
+import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 
-public abstract class StraightLineProjectile extends GameProjectile {
+public abstract class StraightLineProjectile extends ProjectileEntity {
 
     private Vector2 angle;
     private float speed;

@@ -3,12 +3,10 @@ package com.hirshi001.multiplayerrotmg.client.packet.packethandlers;
 import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.client.packet.Packet;
 import com.hirshi001.multiplayerrotmg.gamepieces.inventory.InventoryItem;
-import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.GameProjectile;
+import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-
-import java.util.List;
 
 public class UseInventoryItemHandler extends PacketHandler {
 
@@ -18,7 +16,7 @@ public class UseInventoryItemHandler extends PacketHandler {
     public void handlePacket(Packet p) {
         ByteBuf b = p.getByteBuf();
         try {
-            GameProjectile projectile = EntityRegistry.getProjectileClass(b.readInt()).newInstance();
+            ProjectileEntity projectile = EntityRegistry.getProjectileClass(b.readInt()).newInstance();
             projectile.set(b);
             p.getGame().getField().addProjectile(projectile);
         } catch (InstantiationException | IllegalAccessException e) {

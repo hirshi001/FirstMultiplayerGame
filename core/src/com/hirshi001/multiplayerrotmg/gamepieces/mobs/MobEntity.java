@@ -5,12 +5,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.field.Field;
 import com.hirshi001.multiplayerrotmg.gamepieces.BoxEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
-import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.GameProjectile;
+import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 
 import java.util.List;
 import java.util.Random;
 
-public abstract class GameMob extends BoxEntity {
+public abstract class MobEntity extends BoxEntity {
 
     private Vector2 lastPosition;
 
@@ -18,17 +18,17 @@ public abstract class GameMob extends BoxEntity {
     private int itemTouchingCheckLim = 20;
     private int health = 20;
 
-    public GameMob() {
+    public MobEntity() {
         super(new Vector2(0,0));
         lastPosition = getPosition().cpy();
     }
 
-    public GameMob(final Vector2 position){
+    public MobEntity(final Vector2 position){
         super(position);
         lastPosition = getPosition().cpy();
     }
 
-    public GameMob(final Vector2 position, boolean isCenter){
+    public MobEntity(final Vector2 position, boolean isCenter){
         super(position, isCenter);
         lastPosition = getPosition().cpy();
     }
@@ -37,7 +37,7 @@ public abstract class GameMob extends BoxEntity {
     public Vector2 getCenterPosition(){return getPosition().cpy().add(getWidth()/2f, getHeight()/2f);}
     public Vector2 getCenterPosition(Vector2 v){return v.cpy().add(getWidth()/2f, getHeight()/2f);}
 
-    public GameMob applyDamage(int damage){
+    public MobEntity applyDamage(int damage){
         health-=damage;
         if(health<0){
 
@@ -48,25 +48,25 @@ public abstract class GameMob extends BoxEntity {
     public int getHealth(){
         return health;
     }
-    public GameMob setHealth(int health){
+    public MobEntity setHealth(int health){
         this.health = health;
         return this;
     }
 
 
-    public GameMob applyDamage(int damage, GameProjectile source){
+    public MobEntity applyDamage(int damage, ProjectileEntity source){
         return applyDamage(damage);
     }
 
 
-    public GameMob applyDamage(int damage, GameMob source){
+    public MobEntity applyDamage(int damage, MobEntity source){
         return applyDamage(damage);
     }
 
 
     @Override
-    public GameMob shiftByCenter() {
-        return (GameMob)super.shiftByCenter();
+    public MobEntity shiftByCenter() {
+        return (MobEntity)super.shiftByCenter();
     }
 
     @Override
@@ -89,7 +89,7 @@ public abstract class GameMob extends BoxEntity {
     public abstract void update();
 
     @Override
-    public GameMob setField(Field f) {
+    public MobEntity setField(Field f) {
         field = f;
         return this;
     }
@@ -209,8 +209,8 @@ public abstract class GameMob extends BoxEntity {
         return touchingBox(e.getPosition(),e.getWidth(), e.getHeight());
     }
 
-    public void mobCollision(List<GameMob> mobs){
-        for(GameMob e:mobs){
+    public void mobCollision(List<MobEntity> mobs){
+        for(MobEntity e:mobs){
             if(touchingEntity(e)){
                 if(e==this) continue;
                 onMobCollision(e);
@@ -218,7 +218,7 @@ public abstract class GameMob extends BoxEntity {
         }
     }
 
-    protected void onMobCollision(GameMob e) {
+    protected void onMobCollision(MobEntity e) {
         Random r = new Random();
         if(e.getCenterPosition().equals(getCenterPosition())){
             getLastPosition().set(getPosition());

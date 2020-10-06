@@ -2,7 +2,7 @@ package com.hirshi001.multiplayerrotmg.client.packet.packethandlers;
 
 import com.hirshi001.multiplayerrotmg.client.packet.Packet;
 import com.hirshi001.multiplayerrotmg.gamepieces.entityloaders.gameprojectileloaders.GameProjectileLoader;
-import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.GameProjectile;
+import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
 import io.netty.buffer.ByteBuf;
 
@@ -13,7 +13,7 @@ public class SpawnGameProjectileHandler extends PacketHandler {
         ByteBuf b  = p.getByteBuf();
         int id = b.readInt();
         GameProjectileLoader loader = EntityRegistry.getProjectileLoader(id);
-        GameProjectile proj = loader.spawn(b);
+        ProjectileEntity proj = loader.spawn(b);
         p.getGame().getField().addProjectile(proj);
     }
 }

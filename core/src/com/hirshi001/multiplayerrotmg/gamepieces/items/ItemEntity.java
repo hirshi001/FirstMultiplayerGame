@@ -3,7 +3,7 @@ package com.hirshi001.multiplayerrotmg.gamepieces.items;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.gamepieces.BoxEntity;
-import com.hirshi001.multiplayerrotmg.gamepieces.mobs.GameMob;
+import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 
 public abstract class ItemEntity extends BoxEntity {
 
@@ -12,8 +12,8 @@ public abstract class ItemEntity extends BoxEntity {
         super(position);
     }
 
-    public abstract void onDropped(GameMob e);
-    public abstract void onPicked(GameMob e);
+    public abstract void onDropped(MobEntity e);
+    public abstract void onPicked(MobEntity e);
 
     @Override
     public void draw(Vector2 bottomLeft, Vector2 topRight, SpriteBatch b){

@@ -8,8 +8,7 @@ import com.hirshi001.multiplayerrotmg.client.packet.packethandlers.UnloadChunkHa
 import com.hirshi001.multiplayerrotmg.field.Field;
 import com.hirshi001.multiplayerrotmg.game.Game;
 import com.hirshi001.multiplayerrotmg.game.GameBuilder;
-import com.hirshi001.multiplayerrotmg.gamepieces.entityloaders.gameprojectileloaders.FireballLoader;
-import com.hirshi001.multiplayerrotmg.gamepieces.mobs.GameMob;
+import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.mobs.Player;
 import com.hirshi001.multiplayerrotmg.inputhandlers.InputHandler;
 import com.hirshi001.multiplayerrotmg.field.Block;
@@ -18,17 +17,10 @@ import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
 
 public class GameApplication extends GameApplicationAdapter{
 
-    private GameMob mainPlayer;
+    private MobEntity mainPlayer;
 
     @Override
     public void init() throws NoSuchFieldException, IllegalAccessException {
-        EntityRegistry.registerMobLoader(new PlayerLoader());
-        EntityRegistry.registerMobLoader(new SlimeLoader());
-
-        EntityRegistry.registerItemLoader(new SwordLoader());
-
-        EntityRegistry.registerProjectileLoader(new FireballLoader());
-        EntityRegistry.registerProjectileLoader(new BulletLoader());
 
         PacketRegistry.registerPacketHandler(new UseInventoryItemHandler());
         PacketRegistry.registerPacketHandler(new UnloadChunkHandler());

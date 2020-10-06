@@ -3,7 +3,7 @@ package com.hirshi001.multiplayerrotmg.gamepieces.items;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.hirshi001.multiplayerrotmg.gamepieces.mobs.GameMob;
+import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 import com.hirshi001.multiplayerrotmg.field.Block;
 import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
 import io.netty.buffer.ByteBuf;
@@ -32,12 +32,12 @@ public class Sword extends ItemEntity {
     }
 
     @Override
-    public void onDropped(GameMob e) {
+    public void onDropped(MobEntity e) {
 
     }
 
     @Override
-    public void onPicked(GameMob e) {
+    public void onPicked(MobEntity e) {
 
     }
 

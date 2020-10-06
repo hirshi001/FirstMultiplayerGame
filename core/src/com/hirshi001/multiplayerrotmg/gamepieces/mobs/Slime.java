@@ -13,11 +13,11 @@ import io.netty.buffer.ByteBuf;
 
 import java.util.List;
 
-public class Slime extends GameMob {
+public class Slime extends MobEntity {
 
 
     public static final float WIDTH = 16f/Block.BLOCKWIDTH, HEIGHT = 16f/Block.BLOCKHEIGHT;
-    private GameMob master;
+    private MobEntity master;
     private static Texture t1, t2;
 
     private int updateCount = 60;
@@ -47,7 +47,7 @@ public class Slime extends GameMob {
         return;
     }
 
-    public GameMob getMaster(){return master;}
+    public MobEntity getMaster(){return master;}
 
     @Override
     public float getWidth() {
@@ -86,8 +86,8 @@ public class Slime extends GameMob {
         if(updateCount<0){
             updateCount=60*5;
             master = getField().getMainPlayer();
-            List<GameMob> mobs = getField().getMobsList();
-            for(GameMob m:mobs){
+            List<MobEntity> mobs = getField().getMobsList();
+            for(MobEntity m:mobs){
                 if(m instanceof Player && m.getCenterPosition().dst2(getCenterPosition())<400){
                     master = m;
                     break;

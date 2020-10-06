@@ -5,9 +5,9 @@ import com.badlogic.gdx.utils.Disposable;
 import com.hirshi001.multiplayerrotmg.client.Client;
 import com.hirshi001.multiplayerrotmg.client.packet.packethandlers.UnloadChunkHandler;
 import com.hirshi001.multiplayerrotmg.game.Game;
-import com.hirshi001.multiplayerrotmg.gamepieces.mobs.GameMob;
+import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
-import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.GameProjectile;
+import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 import com.hirshi001.multiplayerrotmg.util.opensimplex.OpenSimplexNoise;
 
 import java.util.LinkedList;
@@ -17,13 +17,13 @@ import java.util.Queue;
 
 public class Field implements Disposable {
 
-    private final List<GameMob> mobs = new LinkedList<>();
-    private final Queue<GameMob> mobsRemove = new LinkedList<>();
-    private final Queue<GameMob> mobsAdd = new LinkedList<>();
+    private final List<MobEntity> mobs = new LinkedList<>();
+    private final Queue<MobEntity> mobsRemove = new LinkedList<>();
+    private final Queue<MobEntity> mobsAdd = new LinkedList<>();
 
-    private final List<GameProjectile> projectiles = new LinkedList<>();
-    private final Queue<GameProjectile> projectilesRemove = new LinkedList<>();
-    private final Queue<GameProjectile> projectilesAdd = new LinkedList<>();
+    private final List<ProjectileEntity> projectiles = new LinkedList<>();
+    private final Queue<ProjectileEntity> projectilesRemove = new LinkedList<>();
+    private final Queue<ProjectileEntity> projectilesAdd = new LinkedList<>();
 
 
     private final List<ItemEntity> items = new LinkedList<>();
@@ -34,7 +34,7 @@ public class Field implements Disposable {
     private final List<Chunk> chunksLoaded = new LinkedList<>();
 
     private Game game;
-    private GameMob mainPlayer;
+    private MobEntity mainPlayer;
 
     /** Used for generating map */
     private OpenSimplexNoise noise;
@@ -46,11 +46,11 @@ public class Field implements Disposable {
         noise = new OpenSimplexNoise(System.currentTimeMillis());
     }
 
-    public List<GameMob> getMobsList(){return mobs;}
+    public List<MobEntity> getMobsList(){return mobs;}
     public List<ItemEntity> getItemsList(){return items;}
-    public List<GameProjectile> getProjectilesList(){return projectiles;}
-    public GameMob getMainPlayer(){return mainPlayer;}
-    public void setMainPlayer(GameMob m){
+    public List<ProjectileEntity> getProjectilesList(){return projectiles;}
+    public MobEntity getMainPlayer(){return mainPlayer;}
+    public void setMainPlayer(MobEntity m){
         mainPlayer = m;
     }
 
@@ -77,13 +77,13 @@ public class Field implements Disposable {
             c = iter.next();
             c.unloadCount--;
             if(c.unloadCount<=0){
-                for(GameMob m:c.getMobs()){
+                for(MobEntity m:c.getMobs()){
                     mobs.remove(m);
                 }
                 for(ItemEntity i:c.getItems()){
                     items.remove(i);
                 }
-                for(GameProjectile p:c.getProjectiles()) {
+                for(ProjectileEntity p:c.getProjectiles()) {
                     projectiles.remove(p);
                 }
                 Client.sendPacket(UnloadChunkHandler.generateUnloadPacket(c.getRow(), c.getCol()));
@@ -105,14 +105,14 @@ public class Field implements Disposable {
     }
 
     private void updateMobs(){
-        for(GameMob m:mobs){ m.updateBoxEntity(); }
-        for(GameMob m:mobs){ m.tileCollision(); }
-        for(GameMob m:mobs){ m.mobCollision(mobs); }
-        for(GameMob m:mobs){ m.itemTouching(items); }
+        for(MobEntity m:mobs){ m.updateBoxEntity(); }
+        for(MobEntity m:mobs){ m.tileCollision(); }
+        for(MobEntity m:mobs){ m.mobCollision(mobs); }
+        for(MobEntity m:mobs){ m.itemTouching(items); }
     }
     private void updateProjectiles(){
-        for(GameProjectile p:projectiles){p.updateBoxEntity();}
-        for(GameProjectile p:projectiles){p.touchingMob(mobs);}
+        for(ProjectileEntity p:projectiles){p.updateBoxEntity();}
+        for(ProjectileEntity p:projectiles){p.touchingMob(mobs);}
     }
 
 
@@ -131,7 +131,7 @@ public class Field implements Disposable {
     }
 
     private void handleMobs(){
-        GameMob e;
+        MobEntity e;
         while (!mobsAdd.isEmpty()) {
             e = mobsAdd.remove();
             e.setField(this);
@@ -152,7 +152,7 @@ public class Field implements Disposable {
     }
 
     private void handleProjectiles(){
-        GameProjectile p;
+        ProjectileEntity p;
         while (!projectilesAdd.isEmpty()) {
             p = projectilesAdd.remove();
             projectiles.add(p);
@@ -188,15 +188,15 @@ public class Field implements Disposable {
         }
     }
 
-    public void removeMob(GameMob m){
+    public void removeMob(MobEntity m){
         mobsRemove.add(m);
     }
-    public void addMob(GameMob m){mobsAdd.add(m);}
+    public void addMob(MobEntity m){mobsAdd.add(m);}
 
-    public void addProjectile(GameProjectile p){
+    public void addProjectile(ProjectileEntity p){
         projectilesAdd.add(p);
     }
-    public void removeProjectile(GameProjectile p){projectilesRemove.add(p);}
+    public void removeProjectile(ProjectileEntity p){projectilesRemove.add(p);}
 
     public void removeItem(ItemEntity i){
         itemsRemove.add(i);

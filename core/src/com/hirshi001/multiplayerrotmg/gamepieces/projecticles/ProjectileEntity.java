@@ -2,21 +2,19 @@ package com.hirshi001.multiplayerrotmg.gamepieces.projecticles;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.hirshi001.multiplayerrotmg.client.Client;
-import com.hirshi001.multiplayerrotmg.client.packet.packethandlers.UseInventoryItemHandler;
 import com.hirshi001.multiplayerrotmg.gamepieces.BoxEntity;
-import com.hirshi001.multiplayerrotmg.gamepieces.mobs.GameMob;
+import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class GameProjectile extends BoxEntity {
+public abstract class ProjectileEntity extends BoxEntity {
 
-    protected GameMob source;
+    protected MobEntity source;
     private LinkedList<GameMobHit> mobsHit = new LinkedList<>();
 
-    public GameProjectile(){super(new Vector2(0,0));}
-    public GameProjectile(Vector2 position) {
+    public ProjectileEntity(){super(new Vector2(0,0));}
+    public ProjectileEntity(Vector2 position) {
         super(position);
     }
 
@@ -42,7 +40,7 @@ public abstract class GameProjectile extends BoxEntity {
 
 
 
-    public GameProjectile source(GameMob o){
+    public ProjectileEntity source(MobEntity o){
         this.source = o;
         return this;
     }
@@ -51,8 +49,8 @@ public abstract class GameProjectile extends BoxEntity {
         return source;
     }
 
-    public void touchingMob(List<GameMob> mobs){
-        for(GameMob m:mobs){
+    public void touchingMob(List<MobEntity> mobs){
+        for(MobEntity m:mobs){
             if(touchingBox(m.getPosition(),m.getWidth(), m.getHeight())){
                 if(mobsHitContains(m)) continue;
                 mobsHit.add(new GameMobHit(m));
@@ -61,7 +59,7 @@ public abstract class GameProjectile extends BoxEntity {
         }
     }
 
-    public boolean mobsHitContains(GameMob m){
+    public boolean mobsHitContains(MobEntity m){
         for(GameMobHit mobHit :mobsHit){
             if(mobHit.mob.equals(m)) return true;
         }
@@ -69,20 +67,20 @@ public abstract class GameProjectile extends BoxEntity {
     }
 
     @Override
-    public GameProjectile shiftByCenter() {
-        return (GameProjectile)super.shiftByCenter();
+    public ProjectileEntity shiftByCenter() {
+        return (ProjectileEntity)super.shiftByCenter();
     }
 
-    public abstract void onTouchingMob(GameMob m);
+    public abstract void onTouchingMob(MobEntity m);
 
 }
 
 class GameMobHit{
 
-    GameMob mob;
+    MobEntity mob;
     int count;
 
-    public GameMobHit(GameMob mob){
+    public GameMobHit(MobEntity mob){
         this.mob = mob;
         count = 0;
     }
