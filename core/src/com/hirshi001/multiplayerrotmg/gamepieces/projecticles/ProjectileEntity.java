@@ -13,7 +13,6 @@ public abstract class ProjectileEntity extends BoxEntity {
     protected MobEntity source;
     private LinkedList<GameMobHit> mobsHit = new LinkedList<>();
 
-    public ProjectileEntity(){super(new Vector2(0,0));}
     public ProjectileEntity(Vector2 position) {
         super(position);
     }

@@ -35,7 +35,6 @@ public class Player extends MobEntity {
         t2 = new Texture("textures/entities/player/player2.png");
         EntityRegistry.addDisposable(t1);
         EntityRegistry.addDisposable(t2);
-
     }
 
     private AnimationCycle cycle = new AnimationCycle(new Animator(new TextureRegion[]{
@@ -44,9 +43,6 @@ public class Player extends MobEntity {
 
     private Inventory inv = new Inventory(9);
     private int currentInvItem = 0;
-
-    //required for loading mobs
-    public Player(){}
 
     public Player(Vector2 position){
         super(position);
@@ -109,7 +105,8 @@ public class Player extends MobEntity {
             Vector2 dir = getCenterPosition().scl(Block.BLOCKWIDTH, Block.BLOCKHEIGHT).sub(dir3.x, dir3.y).rotate(180+(int)(Math.random()*20)-10);
 
 
-            Bullet b = new Bullet(getCenterPosition().add(dir.nor().scl(1.15f)),dir);
+            Bullet b = new Bullet(getCenterPosition().add(dir.nor().scl(1.15f)));
+            b.setAngle(dir);
             b.shiftByCenter();
             b.source(this);
 

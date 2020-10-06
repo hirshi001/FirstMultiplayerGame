@@ -9,6 +9,12 @@ import java.util.List;
 
 public abstract class Entity {
 
+
+
+    public Entity(Vector2 pos){
+
+    }
+
     public abstract Vector2 getLayerPosition();
     public abstract void draw(Vector2 bottomLeft, Vector2 topRight, SpriteBatch b);
 

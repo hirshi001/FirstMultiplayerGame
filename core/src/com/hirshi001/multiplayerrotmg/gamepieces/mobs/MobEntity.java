@@ -6,6 +6,7 @@ import com.hirshi001.multiplayerrotmg.field.Field;
 import com.hirshi001.multiplayerrotmg.gamepieces.BoxEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
+import io.netty.buffer.ByteBuf;
 
 import java.util.List;
 import java.util.Random;
@@ -18,20 +19,11 @@ public abstract class MobEntity extends BoxEntity {
     private int itemTouchingCheckLim = 20;
     private int health = 20;
 
-    public MobEntity() {
-        super(new Vector2(0,0));
-        lastPosition = getPosition().cpy();
-    }
-
     public MobEntity(final Vector2 position){
         super(position);
         lastPosition = getPosition().cpy();
     }
 
-    public MobEntity(final Vector2 position, boolean isCenter){
-        super(position, isCenter);
-        lastPosition = getPosition().cpy();
-    }
 
     public Vector2 getLastPosition(){return lastPosition;}
     public Vector2 getCenterPosition(){return getPosition().cpy().add(getWidth()/2f, getHeight()/2f);}
@@ -253,11 +245,22 @@ public abstract class MobEntity extends BoxEntity {
         }
     }
 
-
     public void onItemTouching(ItemEntity i){
     }
 
+    @Override
+    public void write(ByteBuf out) {
+        super.write(out);
+        out.writeInt(health);
+        out.writeInt(lastItemTouchingCheck);
+        out.writeInt(itemTouchingCheckLim);
+    }
 
-
-
+    @Override
+    public void read(ByteBuf in) {
+        super.read(in);
+        health = in.readInt();
+        lastItemTouchingCheck = in.readInt();
+        itemTouchingCheckLim = in.readInt();
+    }
 }

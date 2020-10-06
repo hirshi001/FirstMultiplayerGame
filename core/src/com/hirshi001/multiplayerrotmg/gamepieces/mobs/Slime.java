@@ -36,8 +36,6 @@ public class Slime extends MobEntity {
     private boolean facingRight = true;
     private int count = 0;
 
-    public Slime(){}
-
     public Slime(Vector2 position) {
         super(position);
     }

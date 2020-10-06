@@ -15,13 +15,13 @@ public abstract class Registry<T> {
      * @param object
      * @return the id of the Object registered which is provided by the Registry
      */
-    public abstract int register(Class<? extends T> object);
+    public abstract int register(T object);
 
     /**
      *
      * @param id
      * @return the object in the registry with the corresponding id
      */
-    public abstract Class<? extends T> getObject(int id);
+    public abstract T getObject(int id);
 
 }

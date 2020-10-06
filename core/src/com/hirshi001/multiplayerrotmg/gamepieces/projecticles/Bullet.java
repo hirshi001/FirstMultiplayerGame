@@ -10,19 +10,16 @@ import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
 
 public class Bullet extends StraightLineProjectile {
 
-    private static float speed = 0.5f;
-    private static int lifeSpan = 200;
-    private static int life = 0;
 
 
     public static final Texture t = new Texture("textures/entities/projectiles/bullet/bullet.png");
     static{
-        EntityRegistry.addDisposable(t);
+        //EntityRegistry.addDisposable(t);
     }
 
-    public Bullet(){}
-    public Bullet(Vector2 position, Vector2 dir) {
-        super(position, dir, speed, lifeSpan, life);
+    public Bullet(Vector2 position) {
+        super(position);
+        setSpeed(0.6f);
     }
 
     @Override

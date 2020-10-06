@@ -2,6 +2,7 @@ package com.hirshi001.multiplayerrotmg.gamepieces.projecticles.projectiletypes;
 
 import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
+import io.netty.buffer.ByteBuf;
 
 public abstract class StraightLineProjectile extends ProjectileEntity {
 
@@ -10,17 +11,15 @@ public abstract class StraightLineProjectile extends ProjectileEntity {
     private int lifespan;
     private int life;
 
-    public StraightLineProjectile() {
+    public StraightLineProjectile(Vector2 position) {
+        super(position);
     }
 
-    public StraightLineProjectile(Vector2 position, Vector2 angle, float speed, int lifespan, int life) {
-        super(position);
+    public StraightLineProjectile setAngleSpeed(Vector2 angle, float speed){
         this.angle = angle.nor().scl(speed);
         this.speed = speed;
-        this.lifespan = lifespan;
-        this.life = life;
+        return this;
     }
-
 
     public Vector2 getAngle() {
         return angle;
@@ -56,6 +55,24 @@ public abstract class StraightLineProjectile extends ProjectileEntity {
     public StraightLineProjectile setLife(int life) {
         this.life = life;
         return this;
+    }
+
+    @Override
+    public void write(ByteBuf out) {
+        super.write(out);
+        out.writeFloat(angle.x);
+        out.writeFloat(angle.y);
+        out.writeFloat(speed);
+        out.writeInt(lifespan);
+        out.writeInt(life);
+    }
+
+    @Override
+    public void read(ByteBuf in) {
+        super.read(in);
+        setAngleSpeed(new Vector2(in.readFloat(), in.readFloat()), in.readFloat());
+        setLifespan(in.readInt());
+        setLife(in.readInt());
     }
 
     @Override

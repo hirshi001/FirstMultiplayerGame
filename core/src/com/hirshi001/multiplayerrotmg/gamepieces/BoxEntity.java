@@ -3,6 +3,7 @@ package com.hirshi001.multiplayerrotmg.gamepieces;
 import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.field.Chunk;
 import com.hirshi001.multiplayerrotmg.field.Field;
+import io.netty.buffer.ByteBuf;
 
 public abstract class BoxEntity extends Entity {
 
@@ -22,11 +23,10 @@ public abstract class BoxEntity extends Entity {
     }
 
     public BoxEntity(Vector2 position){
+        super(position);
         this.position = position;
     }
-    public BoxEntity(Vector2 position, boolean isCenter){
-        this.position = position.sub(getWidth()/2, getHeight()/2);
-    }
+
 
     @Override
     public Vector2 getLayerPosition() {return position; }
@@ -70,6 +70,17 @@ public abstract class BoxEntity extends Entity {
         }
         if(checkEdges) return x2>=y1 && y2>=x1;
         return  x2>y1 && y2>x1;
+    }
+
+    @Override
+    public void write(ByteBuf out) {
+        out.writeFloat(position.x);
+        out.writeFloat(position.y);
+    }
+
+    @Override
+    public void read(ByteBuf in) {
+        position.set(in.readFloat(), in.readFloat());
     }
 
     @Override

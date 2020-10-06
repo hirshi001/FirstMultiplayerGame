@@ -11,20 +11,20 @@ import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 
 public class EntityRegistry {
 
-    public static final Registry<MobEntity> MOB_ENTITY_REGISTRY = new ExpandableRegistry<MobEntity>();
+    public static final Registry<EntityRegistration<MobEntity>> MOB_ENTITY_REGISTRY = new ExpandableRegistry<EntityRegistration<MobEntity>>();
 
-    public static final int PLAYER_MOB_ENTITY = MOB_ENTITY_REGISTRY.register(Player.class);
-    public static final int SLIME_MOB_ENTITY = MOB_ENTITY_REGISTRY.register(Slime.class);
-
-
-    public static final Registry<ItemEntity> ITEM_ENTITY_REGISTRY = new ExpandableRegistry<ItemEntity>();
-
-    public static final int SWORD_ITEM_ENTITY = ITEM_ENTITY_REGISTRY.register(Sword.class);
+    public static final int PLAYER_MOB_ENTITY = MOB_ENTITY_REGISTRY.register(EntityRegistration.<MobEntity>registerEntity(Player::new));
+    public static final int SLIME_MOB_ENTITY = MOB_ENTITY_REGISTRY.register(EntityRegistration.<MobEntity>registerEntity(Slime::new));
 
 
-    public static final Registry<ProjectileEntity> PROJECTILE_ENTITY_REGISTRY = new ExpandableRegistry<ProjectileEntity>();
+    public static final Registry<EntityRegistration<ItemEntity>> ITEM_ENTITY_REGISTRY = new ExpandableRegistry<EntityRegistration<ItemEntity>>();
 
-    public static final int BULLET_PROJECTILE_ENTITY = PROJECTILE_ENTITY_REGISTRY.register(Bullet.class);
-    public static final int FIREBALL_PROJECTILE_ENTITY = PROJECTILE_ENTITY_REGISTRY.register(Fireball.class);
+    public static final int SWORD_ITEM_ENTITY = ITEM_ENTITY_REGISTRY.register(EntityRegistration.<ItemEntity>registerEntity(Sword::new));
+
+
+    public static final Registry<EntityRegistration<ProjectileEntity>> PROJECTILE_ENTITY_REGISTRY = new ExpandableRegistry<EntityRegistration<ProjectileEntity>>();
+
+    public static final int BULLET_PROJECTILE_ENTITY = PROJECTILE_ENTITY_REGISTRY.register(EntityRegistration.<ProjectileEntity>registerEntity(Bullet::new));
+    public static final int FIREBALL_PROJECTILE_ENTITY = PROJECTILE_ENTITY_REGISTRY.register(EntityRegistration.<ProjectileEntity>registerEntity(Fireball::new));
 
 }

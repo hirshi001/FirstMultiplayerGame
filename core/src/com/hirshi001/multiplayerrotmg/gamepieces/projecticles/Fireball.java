@@ -7,28 +7,24 @@ import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.projectiletypes.StraightLineProjectile;
 import com.hirshi001.multiplayerrotmg.field.Block;
 import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
+import com.hirshi001.multiplayerrotmg.registry.Registry;
 
 public class Fireball extends StraightLineProjectile {
 
-    private static float speed = 0.3f;
-    private static int lifespan = 100;
 
     public static final Texture t = new Texture("textures/entities/projectiles/fireball/fireball.png");
 
-    private int life = 0;
     static{
-        EntityRegistry.addDisposable(t);
+        //Registry.addDisposable(t);
     }
 
 
    // public Fireball(){}
-    public Fireball(Vector2 position, Vector2 dir) {
-        super(position, dir, speed, lifespan, 0);
+    public Fireball(Vector2 position) {
+        super(position);
+        setSpeed(0.5f);
     }
 
-
-    @Override
-    public void update(){}
 
     @Override
     public void drawProjectile(SpriteBatch batch) {
