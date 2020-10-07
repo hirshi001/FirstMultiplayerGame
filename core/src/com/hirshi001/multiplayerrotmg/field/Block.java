@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Disposable;
+import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
 
 public class Block implements Disposable {
 
@@ -30,6 +31,7 @@ public class Block implements Disposable {
                     0, 0, pixmap100.getWidth(), pixmap100.getHeight()
             );
             t = new Texture(pixmap100);
+            DisposableRegistry.addDisposable(t);
             pixmap200.dispose();
             pixmap100.dispose();
 

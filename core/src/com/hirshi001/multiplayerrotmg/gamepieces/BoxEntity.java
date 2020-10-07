@@ -7,7 +7,6 @@ import io.netty.buffer.ByteBuf;
 
 public abstract class BoxEntity extends Entity {
 
-    protected Vector2 position;
     protected Field field;
 
     private Chunk chunk;
@@ -24,16 +23,12 @@ public abstract class BoxEntity extends Entity {
 
     public BoxEntity(Vector2 position){
         super(position);
-        this.position = position;
     }
 
 
-    @Override
-    public Vector2 getLayerPosition() {return position; }
 
     public BoxEntity setField(Field f){this.field = f; return this;}
     public Field getField(){return this.field;}
-    public Vector2 getPosition(){return position;}
     public Vector2 getCenterPosition(){return getPosition().cpy();}
 
     public BoxEntity shiftByCenter(){
@@ -74,13 +69,13 @@ public abstract class BoxEntity extends Entity {
 
     @Override
     public void write(ByteBuf out) {
-        out.writeFloat(position.x);
-        out.writeFloat(position.y);
+        out.writeFloat(getPosition().x);
+        out.writeFloat(getPosition().y);
     }
 
     @Override
     public void read(ByteBuf in) {
-        position.set(in.readFloat(), in.readFloat());
+        getPosition().set(in.readFloat(), in.readFloat());
     }
 
     @Override

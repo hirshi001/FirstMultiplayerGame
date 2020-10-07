@@ -5,17 +5,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 import com.hirshi001.multiplayerrotmg.field.Block;
-import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
+import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
 import io.netty.buffer.ByteBuf;
 
 public class Sword extends ItemEntity {
-
-    public static int id;
-
-    @Override
-    public int getId() {
-        return id;
-    }
 
     public static final Texture t = new Texture("rpg-pack/props_n_decorations/generic-rpg-loot01.png");
     private float bounceHeight = 0;
@@ -23,7 +16,7 @@ public class Sword extends ItemEntity {
     private boolean bouncingUp = true;
 
     static{
-        EntityRegistry.addDisposable(t);
+        DisposableRegistry.addDisposable(t);
     }
 
     public Sword(){}
@@ -57,10 +50,19 @@ public class Sword extends ItemEntity {
     }
 
     @Override
-    public void set(ByteBuf buffer) {
-        float x = buffer.readFloat();
-        float y = buffer.readFloat();
-        this.position.set(x,y);
+    public void write(ByteBuf out) {
+        super.write(out);
+        out.writeFloat(bounceHeight);
+        out.writeFloat(bounceHeightLim);
+        out.writeBoolean(bouncingUp);
+    }
+
+    @Override
+    public void read(ByteBuf in) {
+        super.read(in);
+        bounceHeight = in.readFloat();
+        bounceHeightLim = in.readFloat();
+        bouncingUp = in.readBoolean();
     }
 
     @Override

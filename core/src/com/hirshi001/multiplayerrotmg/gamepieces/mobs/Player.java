@@ -15,8 +15,7 @@ import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.Bullet;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 import com.hirshi001.multiplayerrotmg.field.Block;
-import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
-import com.hirshi001.multiplayerrotmg.registry.InventoryItemRegistry;
+import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
 import com.hirshi001.multiplayerrotmg.util.animation.AnimationCycle;
 import com.hirshi001.multiplayerrotmg.util.animation.Animator;
 import io.netty.buffer.ByteBuf;
@@ -33,8 +32,8 @@ public class Player extends MobEntity {
     static{
         t1 = new Texture("textures/entities/player/player1.png");
         t2 = new Texture("textures/entities/player/player2.png");
-        EntityRegistry.addDisposable(t1);
-        EntityRegistry.addDisposable(t2);
+        DisposableRegistry.addDisposable(t1);
+        DisposableRegistry.addDisposable(t2);
     }
 
     private AnimationCycle cycle = new AnimationCycle(new Animator(new TextureRegion[]{
@@ -104,13 +103,13 @@ public class Player extends MobEntity {
             Vector3 dir3 = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0));
             Vector2 dir = getCenterPosition().scl(Block.BLOCKWIDTH, Block.BLOCKHEIGHT).sub(dir3.x, dir3.y).rotate(180+(int)(Math.random()*20)-10);
 
+            Client.sendPacket(UseInventoryItemHandler.generateUseOnePacket(inv.getItem(0), ));
 
             Bullet b = new Bullet(getCenterPosition().add(dir.nor().scl(1.15f)));
             b.setAngle(dir);
             b.shiftByCenter();
             b.source(this);
 
-            Client.sendPacket(UseInventoryItemHandler.generateUseOnePacket());
 
         }
     }
@@ -129,7 +128,7 @@ public class Player extends MobEntity {
 
     @Override
     public String toString() {
-        return "PLAYER at " + position.toString();
+        return "PLAYER at " + getPosition().toString();
     }
 
     public void updateMob(ByteBuf buffer) {
@@ -137,7 +136,7 @@ public class Player extends MobEntity {
 
         switch (updateType){
             case 0 :{
-                this.position.set(buffer.readFloat(), buffer.readFloat());
+                this.getPosition().set(buffer.readFloat(), buffer.readFloat());
                 break;
             }
             case 1:

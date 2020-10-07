@@ -75,7 +75,7 @@ public abstract class MobEntity extends BoxEntity {
 
     @Override
     public void updateBoxEntity(){
-        lastPosition.set(position);
+        lastPosition.set(getPosition());
         update();
     }
     public abstract void update();

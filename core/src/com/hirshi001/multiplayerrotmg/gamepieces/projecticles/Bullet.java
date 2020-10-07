@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.projectiletypes.StraightLineProjectile;
 import com.hirshi001.multiplayerrotmg.field.Block;
+import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
 import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
 
 public class Bullet extends StraightLineProjectile {
@@ -14,7 +15,7 @@ public class Bullet extends StraightLineProjectile {
 
     public static final Texture t = new Texture("textures/entities/projectiles/bullet/bullet.png");
     static{
-        //EntityRegistry.addDisposable(t);
+        DisposableRegistry.addDisposable(t);
     }
 
     public Bullet(Vector2 position) {
