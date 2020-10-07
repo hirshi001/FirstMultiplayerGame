@@ -1,5 +1,6 @@
 package com.hirshi001.multiplayerrotmg.registry;
 
+import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.Sword;
 import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
@@ -26,5 +27,37 @@ public class EntityRegistry {
 
     public static final int BULLET_PROJECTILE_ENTITY = PROJECTILE_ENTITY_REGISTRY.register(EntityRegistration.<ProjectileEntity>registerEntity(Bullet::new));
     public static final int FIREBALL_PROJECTILE_ENTITY = PROJECTILE_ENTITY_REGISTRY.register(EntityRegistration.<ProjectileEntity>registerEntity(Fireball::new));
+
+
+
+
+
+    /**
+     *
+     * @param <T>
+     *     Used for wrapping the initialization method of an Entity type for registrating in a Registry
+     */
+    public static class EntityRegistration<T>{
+
+        public static <E> EntityRegistration<E> registerEntity(EntityCreator<E> ec){
+            return new EntityRegistration<E>(ec);
+        }
+
+        private EntityCreator<T> ec;
+
+        public EntityRegistration(EntityCreator<T> ec){
+            this.ec = ec;
+        }
+
+        public EntityCreator<T> getEntityCreator(){
+            return ec;
+        }
+
+        public interface EntityCreator<P>{
+            public P create(Vector2 pos);
+        }
+
+    }
+
 
 }
