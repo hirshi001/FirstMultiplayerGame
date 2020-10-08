@@ -7,11 +7,16 @@ import io.netty.handler.codec.MessageToByteEncoder;
 
 public class PacketEncoder extends MessageToByteEncoder<Packet> {
 
+    public static final int PACKET_ID_BYTE_SIZE = 4;
+    public static final int PACKET_LENGTH_BYTE_SIZE = 4;
+
     @Override
     protected void encode(ChannelHandlerContext ctx, Packet msg, ByteBuf out) throws Exception {
-        out.writeInt(msg.getId());
-        byte[] arr = out.array();
+        byte[] arr = msg.getByteBuf().array();
         out.writeInt(arr.length);
-        out.writeBytes(arr);
+        out.writeInt(msg.getId());
+        out.writeBytes(msg.getByteBuf());
+
+
     }
 }

@@ -11,7 +11,9 @@ public abstract class Entity {
 
     private Vector2 pos;
 
-    public Entity(Vector2 pos){ this.pos = pos; }
+    private int id;
+
+    public Entity(Vector2 pos, int id){ this.pos = pos; this.id = id;}
 
     public Vector2 getPosition(){return pos;}
 
@@ -22,6 +24,11 @@ public abstract class Entity {
 
     public abstract Chunk getChunk();
     public abstract void setChunk(Chunk chunk);
+
+    /**
+     * When called on the client side, this method generally wont have any functionaliy
+     */
+    public abstract void update();
 
     /**
      * This method will not be called from the client side. Information for Entity updates will be sent through packets.
@@ -36,4 +43,9 @@ public abstract class Entity {
      */
     public abstract void read(ByteBuf in);
 
+    @Override
+    public int hashCode() {
+        String
+        return id;
+    }
 }

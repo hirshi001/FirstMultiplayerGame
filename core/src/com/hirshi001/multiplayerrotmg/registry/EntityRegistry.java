@@ -28,10 +28,6 @@ public class EntityRegistry {
     public static final int BULLET_PROJECTILE_ENTITY = PROJECTILE_ENTITY_REGISTRY.register(EntityRegistration.<ProjectileEntity>registerEntity(Bullet::new));
     public static final int FIREBALL_PROJECTILE_ENTITY = PROJECTILE_ENTITY_REGISTRY.register(EntityRegistration.<ProjectileEntity>registerEntity(Fireball::new));
 
-
-
-
-
     /**
      *
      * @param <T>

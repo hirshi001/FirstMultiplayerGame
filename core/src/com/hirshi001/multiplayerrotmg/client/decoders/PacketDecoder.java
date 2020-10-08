@@ -10,10 +10,10 @@ import io.netty.handler.codec.ByteToMessageDecoder;
 
 import java.util.List;
 
-public class PacketDecoder extends ByteToMessageDecoder {
+import static com.hirshi001.multiplayerrotmg.client.encoders.PacketEncoder.PACKET_LENGTH_BYTE_SIZE;
+import static com.hirshi001.multiplayerrotmg.client.encoders.PacketEncoder.PACKET_ID_BYTE_SIZE;
 
-    private final int packetIdByteSize = 4;
-    private final int packetByteSize = 4;
+public class PacketDecoder extends ByteToMessageDecoder {
 
     private Game game;
 
@@ -23,13 +23,14 @@ public class PacketDecoder extends ByteToMessageDecoder {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
-        if(in.readableBytes() < packetByteSize + packetIdByteSize)return;
 
-        int packetSize = in.getInt(3);
-        if(in.readableBytes() < packetByteSize + packetIdByteSize + packetSize) return;
+        if(in.readableBytes() < PACKET_LENGTH_BYTE_SIZE) return;
+        int packetSize = in.getInt(0);
+        if(in.readableBytes() < PACKET_LENGTH_BYTE_SIZE + PACKET_ID_BYTE_SIZE + packetSize) return;
+        in.readInt();
         int id = in.readInt();
         int size = in.readInt();
-        ByteBuf b = Unpooled.copiedBuffer(in);
+        ByteBuf b = Unpooled.copiedBuffer(in.array(), 0, size);
         Packet packet = new Packet().setId(id).setBytes(b).setGame(game);
 
         PacketRegistry.getPacketHandler(id).handlePacket(packet);
