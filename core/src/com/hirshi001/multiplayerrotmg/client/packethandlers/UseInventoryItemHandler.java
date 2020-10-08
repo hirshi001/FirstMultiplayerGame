@@ -1,27 +1,21 @@
-package com.hirshi001.multiplayerrotmg.client.packet.packethandlers;
+package com.hirshi001.multiplayerrotmg.client.packethandlers;
 
 import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.client.packet.Packet;
 import com.hirshi001.multiplayerrotmg.gamepieces.inventory.InventoryItem;
-import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
-import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 
 public class UseInventoryItemHandler extends PacketHandler {
 
-    public static int id;
 
+    /**
+     * This packet will never be received by the client, therefore there is no way to handle it.
+     * @param p
+     */
     @Override
     public void handlePacket(Packet p) {
-        ByteBuf b = p.getByteBuf();
-        try {
-            ProjectileEntity projectile = EntityRegistry.getProjectileClass(b.readInt()).newInstance();
-            projectile.set(b);
-            p.getGame().getField().addProjectile(projectile);
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
+
     }
 
 
@@ -32,7 +26,7 @@ public class UseInventoryItemHandler extends PacketHandler {
         buff.writeFloat(usePosition.x);
         buff.writeFloat(usePosition.y);
 
-        return new Packet().setId(id).setBytes(buff);
+        return new Packet().setId(getId()).setBytes(buff);
     }
 
 
@@ -43,7 +37,7 @@ public class UseInventoryItemHandler extends PacketHandler {
         buff.writeFloat(usePosition.x);
         buff.writeFloat(usePosition.y);
 
-        return new Packet().setId(id).setBytes(buff);
+        return new Packet().setId(getId()).setBytes(buff);
     }
 
 }

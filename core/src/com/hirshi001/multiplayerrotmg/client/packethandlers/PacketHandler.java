@@ -1,4 +1,4 @@
-package com.hirshi001.multiplayerrotmg.client.packet.packethandlers;
+package com.hirshi001.multiplayerrotmg.client.packethandlers;
 
 import com.hirshi001.multiplayerrotmg.client.packet.Packet;
 import com.hirshi001.multiplayerrotmg.util.identifiable.IdentifiableObject;

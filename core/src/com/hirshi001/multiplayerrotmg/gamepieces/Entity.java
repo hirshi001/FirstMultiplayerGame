@@ -31,21 +31,21 @@ public abstract class Entity {
     public abstract void update();
 
     /**
-     * This method will not be called from the client side. Information for Entity updates will be sent through packets.
+     * Writes to a ByteBuf all the necessary information needed to load the entity.
+     * This method will not be called from the client side.
      * @param out
      */
     public abstract void write(ByteBuf out);
 
     /**
-     * This method is called whenever this Entity Object is created. The ByteBuf should contain all the data needed to
-     * fully and properly initialize this Object.
+     * This method is called whenever a chunk is loaded which contains an entity.
+     * This method will not be called from the client side.
      * @param in
      */
     public abstract void read(ByteBuf in);
 
     @Override
     public int hashCode() {
-        String
         return id;
     }
 }

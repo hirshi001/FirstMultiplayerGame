@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 import com.hirshi001.multiplayerrotmg.client.Client;
 import com.hirshi001.multiplayerrotmg.game.Game;
+import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
+import com.hirshi001.multiplayerrotmg.gamepieces.mobs.Player;
 
 public abstract class GameApplicationAdapter implements Disposable {
 
@@ -18,6 +20,8 @@ public abstract class GameApplicationAdapter implements Disposable {
     private OrthographicCamera camera;
 
     private Client client;
+
+    private Player player;
 
     public abstract void init() throws NoSuchFieldException, IllegalAccessException;
 

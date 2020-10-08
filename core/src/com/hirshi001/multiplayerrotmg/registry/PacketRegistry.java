@@ -1,6 +1,6 @@
 package com.hirshi001.multiplayerrotmg.registry;
 
-import com.hirshi001.multiplayerrotmg.client.packet.packethandlers.PacketHandler;
+import com.hirshi001.multiplayerrotmg.client.packethandlers.PacketHandler;
 
 import java.util.ArrayList;
 import java.util.List;

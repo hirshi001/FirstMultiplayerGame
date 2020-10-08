@@ -3,17 +3,22 @@ package com.hirshi001.multiplayerrotmg.field;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import com.hirshi001.multiplayerrotmg.client.Client;
-import com.hirshi001.multiplayerrotmg.client.packet.packethandlers.UnloadChunkHandler;
+import com.hirshi001.multiplayerrotmg.client.packethandlers.UnloadChunkHandler;
 import com.hirshi001.multiplayerrotmg.game.Game;
+import com.hirshi001.multiplayerrotmg.gamepieces.Entity;
 import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 import com.hirshi001.multiplayerrotmg.util.opensimplex.OpenSimplexNoise;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 
 public class Field implements Disposable {
 
@@ -30,8 +35,8 @@ public class Field implements Disposable {
     private final Queue<ItemEntity> itemsRemove = new LinkedList<>();
     private final Queue<ItemEntity> itemsAdd = new LinkedList<>();
 
-
     private final List<Chunk> chunksLoaded = new LinkedList<>();
+    private final Map<Integer, Entity> entities = new HashMap<>();
 
     private Game game;
     private MobEntity mainPlayer;
@@ -135,18 +140,19 @@ public class Field implements Disposable {
         while (!mobsAdd.isEmpty()) {
             e = mobsAdd.remove();
             e.setField(this);
-
             Vector2 pos = e.getCenterPosition();
             Chunk c = getChunkFromCoordinate(pos.x, pos.y);
             e.setChunk(c);
             c.addMob(e);
 
             mobs.add(e);
+            entities.put(e.getId(), e);
         }
 
         while (!mobsRemove.isEmpty()) {
             e = mobsRemove.remove();
             mobs.remove(e);
+            entities.remove(e.getId());
             e.getChunk().removeMob(e);
         }
     }
@@ -155,17 +161,20 @@ public class Field implements Disposable {
         ProjectileEntity p;
         while (!projectilesAdd.isEmpty()) {
             p = projectilesAdd.remove();
-            projectiles.add(p);
             Vector2 pos = p.getCenterPosition();
             Chunk c = getChunkFromCoordinate(pos.x, pos.y);
             c.addProjectile(p);
             p.setChunk(c);
             p.setField(this);
+
+            projectiles.add(p);
+            entities.put(p.getId(), p);
         }
 
         while (!projectilesRemove.isEmpty()) {
             p = projectilesRemove.remove();
             projectiles.remove(p);
+            entities.remove(p.getId());
             p.getChunk().removeProjectile(p);
         }
     }
@@ -173,17 +182,20 @@ public class Field implements Disposable {
         ItemEntity i;
         while (!itemsAdd.isEmpty()) {
             i = itemsAdd.remove();
-            items.add(i);
             Vector2 pos = i.getCenterPosition();
             Chunk c = getChunkFromCoordinate(pos.x, pos.y);
             c.addItem(i);
             i.setChunk(c);
             i.setField(this);
+
+            items.add(i);
+            entities.put(i.getId(), i);
         }
 
         while (!itemsRemove.isEmpty()) {
             i = itemsRemove.remove();
             items.remove(i);
+            entities.remove(i.getId());
             i.getChunk().removeItem(i);
         }
     }

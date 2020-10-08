@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.hirshi001.multiplayerrotmg.client.Client;
-import com.hirshi001.multiplayerrotmg.client.packet.packethandlers.UseInventoryItemHandler;
+import com.hirshi001.multiplayerrotmg.client.packethandlers.UseInventoryItemHandler;
 import com.hirshi001.multiplayerrotmg.gamepieces.inventory.Inventory;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.Bullet;
