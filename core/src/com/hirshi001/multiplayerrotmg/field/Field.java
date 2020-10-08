@@ -1,5 +1,6 @@
 package com.hirshi001.multiplayerrotmg.field;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import com.hirshi001.multiplayerrotmg.client.Client;
@@ -215,6 +216,11 @@ public class Field implements Disposable {
     }
     public void addItem(ItemEntity i){itemsAdd.add(i); }
 
+    public void draw(SpriteBatch batch){
+        for(Chunk c:getChunks()) {
+            c.drawTiles(batch);
+        }
+    }
 
     @Override
     public void dispose() {
