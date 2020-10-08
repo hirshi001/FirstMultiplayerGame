@@ -44,8 +44,7 @@ public abstract class Entity {
      */
     public abstract void read(ByteBuf in);
 
-    @Override
-    public int hashCode() {
+    public int getId() {
         return id;
     }
 }

@@ -11,18 +11,8 @@ public abstract class BoxEntity extends Entity {
 
     private Chunk chunk;
 
-    int id;
-
-    public final int getId(){
-        return id;
-    }
-
-    public final void setId(int id){
-        this.id = id;
-    }
-
-    public BoxEntity(Vector2 position){
-        super(position);
+    public BoxEntity(Vector2 position, int id){
+        super(position, id);
     }
 
 
