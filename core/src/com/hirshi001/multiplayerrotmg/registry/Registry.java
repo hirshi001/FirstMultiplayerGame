@@ -10,23 +10,18 @@ import com.hirshi001.multiplayerrotmg.gamepieces.Entity;
  */
 public abstract class Registry<T> {
 
-
-
-
-
-
     /**
      *
      * @param object
-     * @return the id of the Object registered which is provided by the Registry
+     * @return the same object which was passed
      */
-    public abstract int register(T object);
+    public abstract Registration<? extends T> register(Registration<? extends T> object);
 
     /**
      *
      * @param id
      * @return the object in the registry with the corresponding id
      */
-    public abstract T getObject(int id);
+    public abstract Registration<? extends T> getRegistration(int id);
 
 }

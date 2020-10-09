@@ -20,9 +20,8 @@ public class Fireball extends StraightLineProjectile {
     }
 
 
-   // public Fireball(){}
-    public Fireball(Vector2 position) {
-        super(position);
+    public Fireball(Vector2 position, int id) {
+        super(position, id);
         setSpeed(0.5f);
     }
 

@@ -11,8 +11,8 @@ public abstract class StraightLineProjectile extends ProjectileEntity {
     private int lifespan;
     private int life;
 
-    public StraightLineProjectile(Vector2 position) {
-        super(position);
+    public StraightLineProjectile(Vector2 position, int id) {
+        super(position, id);
     }
 
     public StraightLineProjectile setAngleSpeed(Vector2 angle, float speed){
@@ -76,7 +76,7 @@ public abstract class StraightLineProjectile extends ProjectileEntity {
     }
 
     @Override
-    public void update() {
+    public void updateTick() {
         getPosition().add(angle);
     }
 

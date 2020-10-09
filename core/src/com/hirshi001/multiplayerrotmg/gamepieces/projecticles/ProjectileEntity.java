@@ -13,8 +13,8 @@ public abstract class ProjectileEntity extends BoxEntity {
     protected MobEntity source;
     private LinkedList<GameMobHit> mobsHit = new LinkedList<>();
 
-    public ProjectileEntity(Vector2 position) {
-        super(position);
+    public ProjectileEntity(Vector2 position, int id) {
+        super(position, id);
     }
 
     @Override
@@ -26,10 +26,10 @@ public abstract class ProjectileEntity extends BoxEntity {
 
     @Override
     public void updateBoxEntity() {
-        update();
+        updateTick();
     }
 
-    public abstract void update();
+    public abstract void updateTick();
 
     public abstract void drawProjectile(SpriteBatch batch);
 

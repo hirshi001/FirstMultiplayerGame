@@ -15,8 +15,6 @@ public abstract class BoxEntity extends Entity {
         super(position, id);
     }
 
-
-
     public BoxEntity setField(Field f){this.field = f; return this;}
     public Field getField(){return this.field;}
     public Vector2 getCenterPosition(){return getPosition().cpy();}
@@ -26,6 +24,10 @@ public abstract class BoxEntity extends Entity {
         return this;
     }
 
+    /**
+     * The updateBoxEntity() method is generally used for updating movement.
+     * The update() method is for checking collision and other events.
+     */
     public abstract void updateBoxEntity();
 
     public abstract float getWidth();

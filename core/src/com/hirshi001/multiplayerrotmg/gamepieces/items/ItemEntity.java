@@ -7,9 +7,8 @@ import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 
 public abstract class ItemEntity extends BoxEntity {
 
-    public ItemEntity(){super(new Vector2(0,0));}
-    public ItemEntity(Vector2 position) {
-        super(position);
+    public ItemEntity(Vector2 position, int id) {
+        super(position, id);
     }
 
     public abstract void onDropped(MobEntity e);

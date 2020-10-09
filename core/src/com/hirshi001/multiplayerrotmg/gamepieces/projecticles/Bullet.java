@@ -18,8 +18,8 @@ public class Bullet extends StraightLineProjectile {
         DisposableRegistry.addDisposable(t);
     }
 
-    public Bullet(Vector2 position) {
-        super(position);
+    public Bullet(Vector2 position, int id) {
+        super(position, id);
         setSpeed(0.6f);
     }
 

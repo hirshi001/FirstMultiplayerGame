@@ -28,7 +28,7 @@ public abstract class Entity {
     /**
      * When called on the client side, this method generally wont have any functionaliy
      */
-    public abstract void update();
+    public abstract void updateTick();
 
     /**
      * Writes to a ByteBuf all the necessary information needed to load the entity.
@@ -43,6 +43,14 @@ public abstract class Entity {
      * @param in
      */
     public abstract void read(ByteBuf in);
+
+    /**
+     * updates the entity based on the bits in the array.
+     * @param in
+     */
+    public void update(ByteBuf in){}
+
+
 
     public int getId() {
         return id;

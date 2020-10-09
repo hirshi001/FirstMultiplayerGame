@@ -19,8 +19,8 @@ public abstract class MobEntity extends BoxEntity {
     private int itemTouchingCheckLim = 20;
     private int health = 20;
 
-    public MobEntity(final Vector2 position){
-        super(position);
+    public MobEntity(final Vector2 position, int id){
+        super(position, id);
         lastPosition = getPosition().cpy();
     }
 
@@ -76,9 +76,9 @@ public abstract class MobEntity extends BoxEntity {
     @Override
     public void updateBoxEntity(){
         lastPosition.set(getPosition());
-        update();
+        updateTick();
     }
-    public abstract void update();
+    public abstract void updateTick();
 
     @Override
     public MobEntity setField(Field f) {

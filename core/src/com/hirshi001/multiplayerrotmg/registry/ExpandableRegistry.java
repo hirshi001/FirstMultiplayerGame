@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class ExpandableRegistry<T> extends Registry<T> {
 
-    private ArrayList<T> registrationList = new ArrayList<>();
+    private ArrayList<Registration<? extends T>> registrationList = new ArrayList<>();
 
     @Override
-    public int register(T object) {
-        registrationList.add(object);
-        return registrationList.size()-1;
+    public Registration<? extends T> register(Registration<? extends T> registration) {
+        registrationList.add(registration);
+        return registration;
     }
 
     @Override
-    public T getObject(int id) {
+    public Registration<? extends T> getRegistration(int id) {
         return registrationList.get(id);
     }
 }

@@ -37,8 +37,8 @@ public class Slime extends MobEntity {
     private boolean facingRight = true;
     private int count = 0;
 
-    public Slime(Vector2 position) {
-        super(position);
+    public Slime(Vector2 position, int id) {
+        super(position, id);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Slime extends MobEntity {
 
 
     @Override
-    public void update() {
+    public void updateTick() {
        moveToMaster();
 
 

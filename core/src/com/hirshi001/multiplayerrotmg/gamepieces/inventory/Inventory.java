@@ -1,5 +1,7 @@
 package com.hirshi001.multiplayerrotmg.gamepieces.inventory;
 
+import com.hirshi001.multiplayerrotmg.gamepieces.inventory.inventoryitem.InventoryItem;
+
 public class Inventory {
 
     private InventoryItem[] items;

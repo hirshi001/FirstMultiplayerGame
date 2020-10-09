@@ -2,7 +2,7 @@ package com.hirshi001.multiplayerrotmg.client.packethandlers;
 
 import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.client.packet.Packet;
-import com.hirshi001.multiplayerrotmg.gamepieces.inventory.InventoryItem;
+import com.hirshi001.multiplayerrotmg.gamepieces.inventory.inventoryitem.InventoryItem;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 

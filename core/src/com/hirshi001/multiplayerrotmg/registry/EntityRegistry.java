@@ -12,9 +12,9 @@ import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 
 public class EntityRegistry {
 
-    public static final Registry<EntityRegistration<MobEntity>> MOB_ENTITY_REGISTRY = new ExpandableRegistry<EntityRegistration<MobEntity>>();
+    public static final Registry<MobEntity> MOB_ENTITY_REGISTRY = new ExpandableRegistry<MobEntity>();
 
-    public static final int PLAYER_MOB_ENTITY = MOB_ENTITY_REGISTRY.register(EntityRegistration.<MobEntity>registerEntity(Player::new));
+    public static final Registration<Player> PLAYER_MOB_ENTITY = MOB_ENTITY_REGISTRY.register(EntityRegistration.<Player>registerEntity(Player::new));
     public static final int SLIME_MOB_ENTITY = MOB_ENTITY_REGISTRY.register(EntityRegistration.<MobEntity>registerEntity(Slime::new));
 
 
@@ -33,7 +33,7 @@ public class EntityRegistry {
      * @param <T>
      *     Used for wrapping the initialization method of an Entity type for registrating in a Registry
      */
-    public static class EntityRegistration<T>{
+    public static class EntityRegistration<T> extends Registration<T>{
 
         public static <E> EntityRegistration<E> registerEntity(EntityCreator<E> ec){
             return new EntityRegistration<E>(ec);
@@ -42,6 +42,7 @@ public class EntityRegistry {
         private EntityCreator<T> ec;
 
         public EntityRegistration(EntityCreator<T> ec){
+            super(null);
             this.ec = ec;
         }
 
@@ -50,7 +51,7 @@ public class EntityRegistry {
         }
 
         public interface EntityCreator<P>{
-            public P create(Vector2 pos);
+            public P create(Vector2 pos, int id);
         }
 
     }

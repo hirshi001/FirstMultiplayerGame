@@ -19,9 +19,8 @@ public class Sword extends ItemEntity {
         DisposableRegistry.addDisposable(t);
     }
 
-    public Sword(){}
-    public Sword(Vector2 position) {
-        super(position);
+    public Sword(Vector2 position, int id) {
+        super(position, id);
     }
 
     @Override

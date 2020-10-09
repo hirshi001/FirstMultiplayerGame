@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.hirshi001.multiplayerrotmg.client.Client;
+import com.hirshi001.multiplayerrotmg.client.packet.UseInventoryItemPacket;
 import com.hirshi001.multiplayerrotmg.client.packethandlers.UseInventoryItemHandler;
 import com.hirshi001.multiplayerrotmg.gamepieces.inventory.Inventory;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
@@ -16,6 +17,7 @@ import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.Bullet;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 import com.hirshi001.multiplayerrotmg.field.Block;
 import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
+import com.hirshi001.multiplayerrotmg.registry.PacketRegistry;
 import com.hirshi001.multiplayerrotmg.util.animation.AnimationCycle;
 import com.hirshi001.multiplayerrotmg.util.animation.Animator;
 import io.netty.buffer.ByteBuf;
@@ -40,11 +42,19 @@ public class Player extends MobEntity {
             new TextureRegion(t1),new TextureRegion(t2)}));;
     private boolean facingRight = true;
 
-    private Inventory inv = new Inventory(9);
+    private Inventory inv;
     private int currentInvItem = 0;
 
-    public Player(Vector2 position){
-        super(position);
+    public Player(Vector2 position, int id){
+        super(position, id);
+        initializeInv();
+    }
+
+    private void initializeInv(){
+        inv = new Inventory(9);
+        inv.setItem(new FirebalItem(), 0);
+        inv.setItem(new BulletItem(), 1);
+
     }
 
     @Override
@@ -72,7 +82,7 @@ public class Player extends MobEntity {
     private int count = 0;
 
     @Override
-    public void update() {
+    public void updateTick() {
         Vector2 mov = Vector2.Zero.cpy();
         if(Gdx.input.isKeyPressed(Input.Keys.D)) mov.x++;
         if(Gdx.input.isKeyPressed(Input.Keys.A)) mov.x--;
@@ -101,16 +111,17 @@ public class Player extends MobEntity {
         if(lastShot==lastShotLim && Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
             lastShot = 0;
             Vector3 dir3 = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0));
-            Vector2 dir = getCenterPosition().scl(Block.BLOCKWIDTH, Block.BLOCKHEIGHT).sub(dir3.x, dir3.y).rotate(180+(int)(Math.random()*20)-10);
+            Vector2 usePos = new Vector2(dir3.x, dir3.y);
+            //Vector2 dir = getCenterPosition().scl(Block.BLOCKWIDTH, Block.BLOCKHEIGHT).sub(dir3.x, dir3.y).rotate(180+(int)(Math.random()*20)-10);
 
-            Client.sendPacket(UseInventoryItemHandler.generateUseOnePacket(inv.getItem(0), ));
-
+            UseInventoryItemPacket packet = PacketRegistry.USE_ONE_PACKET.getEntityCreator().create().set;
+            Client.sendPacket(packet);
+            /*
             Bullet b = new Bullet(getCenterPosition().add(dir.nor().scl(1.15f)));
             b.setAngle(dir);
             b.shiftByCenter();
             b.source(this);
-
-
+            */
         }
     }
 
