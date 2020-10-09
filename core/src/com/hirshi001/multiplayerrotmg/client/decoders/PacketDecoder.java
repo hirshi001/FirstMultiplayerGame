@@ -33,6 +33,7 @@ public class PacketDecoder extends ByteToMessageDecoder {
         ByteBuf b = Unpooled.copiedBuffer(in.array(), 0, size);
         Packet packet = new Packet().setId(id).setBytes(b).setGame(game);
 
+        PacketRegistry.PACKET_HANDLER_REGISTRY.getRegistration(id).
         PacketRegistry.getPacketHandler(id).handlePacket(packet);
     }
 }

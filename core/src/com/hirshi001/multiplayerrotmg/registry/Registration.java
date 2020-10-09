@@ -22,6 +22,10 @@ public class Registration<T>{
         return id;
     }
 
+    public void setId(int id){
+        this.id = id;
+    }
+
     public interface ObjectCreator<P>{
         public P create();
     }

@@ -1,24 +1,40 @@
 package com.hirshi001.multiplayerrotmg.registry;
 
+
 import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.client.packet.Packet;
 import com.hirshi001.multiplayerrotmg.client.packet.UseInventoryItemPacket;
 import com.hirshi001.multiplayerrotmg.client.packethandlers.PacketHandler;
+import com.hirshi001.multiplayerrotmg.client.packethandlers.SpawnGameProjectileHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PacketRegistry {
 
-    public static final ExpandableRegistry<Packet> PACKET_REGISTRY = new ExpandableRegistry<Packet>();
+    public static final ExpandableRegistry<Registration<? extends Packet>> PACKET_REGISTRY = new ExpandableRegistry<Registration<? extends Packet>>();
 
-    public static final Registration<UseInventoryItemPacket> USE_ONE_PACKET = Registration.<UseInventoryItemPacket>registerObject(UseInventoryItemPacket::new);
-    static{
-        PACKET_REGISTRY.<UseInventoryItemPacket>register(USE_ONE_PACKET);
+    public static final Registration<UseInventoryItemPacket> USE_ONE_PACKET = registerPacket(UseInventoryItemPacket::new);
+
+
+    public static final ExpandableRegistry<PacketHandler> PACKET_HANDLER_REGISTRY = new ExpandableRegistry<PacketHandler>();
+
+    public static final SpawnGameProjectileHandler SPAWN_GAME_PROJECTILE_HANDLER = registerPacketHandler(new SpawnGameProjectileHandler());
+
+
+
+    public static <T extends Packet> Registration<T> registerPacket(Registration.ObjectCreator<T> oc){
+        Registration<T> registration = Registration.registerObject(oc);
+        registration.setId(PACKET_REGISTRY.register(registration));
+        return registration;
     }
 
-    public static final List<PacketHandler> packetHandlers = new ArrayList<>();
+    public static <T extends PacketHandler> T registerPacketHandler(T packetHandler){
+        packetHandler.setId(PACKET_HANDLER_REGISTRY.register(packetHandler));
+        return packetHandler;
+    }
 
+    /*
     public static void registerPacketHandler(PacketHandler packetHandler) throws NoSuchFieldException, IllegalAccessException {
         packetHandler.getClass().getDeclaredField("id").setInt(null, packetHandlers.size());
         packetHandlers.add(packetHandler);
@@ -33,6 +49,8 @@ public class PacketRegistry {
         return (E)packetHandlers.get(id);
     }
 
+
+     */
 
 
 }
