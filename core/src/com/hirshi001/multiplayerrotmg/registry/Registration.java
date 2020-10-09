@@ -27,6 +27,7 @@ public class Registration<T>{
     }
 
     public interface ObjectCreator<P>{
+
         public P create();
     }
 

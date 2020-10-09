@@ -114,7 +114,13 @@ public class Player extends MobEntity {
             Vector2 usePos = new Vector2(dir3.x, dir3.y);
             //Vector2 dir = getCenterPosition().scl(Block.BLOCKWIDTH, Block.BLOCKHEIGHT).sub(dir3.x, dir3.y).rotate(180+(int)(Math.random()*20)-10);
 
-            UseInventoryItemPacket packet = PacketRegistry.USE_ONE_PACKET.getEntityCreator().create().set;
+            UseInventoryItemPacket packet = PacketRegistry.USE_ONE_PACKET.getObjectCreator().create();
+
+            packet.setId(PacketRegistry.USE_ONE_PACKET.getId());
+            packet.setItem(inv.getItem(currentInvItem));
+            packet.setInventoryIndex(currentInvItem);
+            packet.setUsePosition(usePos);
+            packet.generate();
             Client.sendPacket(packet);
             /*
             Bullet b = new Bullet(getCenterPosition().add(dir.nor().scl(1.15f)));

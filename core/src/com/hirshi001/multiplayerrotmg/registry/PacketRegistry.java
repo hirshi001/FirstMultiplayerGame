@@ -1,14 +1,10 @@
 package com.hirshi001.multiplayerrotmg.registry;
 
 
-import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.client.packet.Packet;
 import com.hirshi001.multiplayerrotmg.client.packet.UseInventoryItemPacket;
 import com.hirshi001.multiplayerrotmg.client.packethandlers.PacketHandler;
-import com.hirshi001.multiplayerrotmg.client.packethandlers.SpawnGameProjectileHandler;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.hirshi001.multiplayerrotmg.client.packethandlers.SpawnProjectileHandler;
 
 public class PacketRegistry {
 
@@ -19,7 +15,7 @@ public class PacketRegistry {
 
     public static final ExpandableRegistry<PacketHandler> PACKET_HANDLER_REGISTRY = new ExpandableRegistry<PacketHandler>();
 
-    public static final SpawnGameProjectileHandler SPAWN_GAME_PROJECTILE_HANDLER = registerPacketHandler(new SpawnGameProjectileHandler());
+    public static final SpawnProjectileHandler SPAWN_GAME_PROJECTILE_HANDLER = registerPacketHandler(new SpawnProjectileHandler());
 
 
 
