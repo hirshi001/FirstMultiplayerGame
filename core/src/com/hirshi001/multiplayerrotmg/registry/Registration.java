@@ -22,8 +22,8 @@ public class Registration<T>{
         return id;
     }
 
-    public interface ObjectCreator<P, R extends Object>{
-        public P create(R obj);
+    public interface ObjectCreator<P>{
+        public P create();
     }
 
 }
