@@ -9,19 +9,19 @@ import com.hirshi001.multiplayerrotmg.client.packethandlers.SpawnProjectileHandl
 public class PacketRegistry {
 
     public static final ExpandableRegistry<Registration<? extends Packet>> PACKET_REGISTRY = new ExpandableRegistry<Registration<? extends Packet>>();
-
-    public static final Registration<UseInventoryItemPacket> USE_ONE_PACKET = registerPacket(UseInventoryItemPacket::new);
-
-
     public static final ExpandableRegistry<PacketHandler> PACKET_HANDLER_REGISTRY = new ExpandableRegistry<PacketHandler>();
 
-    public static final SpawnProjectileHandler SPAWN_GAME_PROJECTILE_HANDLER = registerPacketHandler(new SpawnProjectileHandler());
+    public static final Registration<UseInventoryItemPacket> USE_ONE_PACKET = registerPacket(UseInventoryItemPacket::new, new SpawnProjectileHandler());
 
 
 
-    public static <T extends Packet> Registration<T> registerPacket(Registration.ObjectCreator<T> oc){
+
+
+
+    public static <T extends Packet, H extends PacketHandler> Registration<T> registerPacket(Registration.ObjectCreator<T> oc, H packetHandler){
         Registration<T> registration = Registration.registerObject(oc);
         registration.setId(PACKET_REGISTRY.register(registration));
+        packetHandler.setId(PACKET_HANDLER_REGISTRY.register(packetHandler));
         return registration;
     }
 
