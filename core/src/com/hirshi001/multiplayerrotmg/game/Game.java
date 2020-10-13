@@ -117,6 +117,9 @@ public class Game implements Disposable {
         handleCameraPosition();
     }
 
+    /**
+     * Sets the camera position
+     */
     private void handleCameraPosition(){
         if(getInputHandler().getScreenMover().isCameraFollow()){
             OrthographicCamera camera = getGameApplicationAdapter().getCamera();
@@ -127,12 +130,11 @@ public class Game implements Disposable {
         }
     }
 
+    /**
+     * Handles sending chunk requests to server and removing chunks from the field
+     */
     private void handleChunkLoading(){
-        Vector3 camPos = getGameApplicationAdapter().getCamera().position;
-        Vector2 pos = new Vector2(camPos.x, camPos.y).scl(1f/Block.BLOCKWIDTH, 1f/Block.BLOCKHEIGHT);//field.getMainPlayer().getCenterPosition();
-        //pos = getField().getMainPlayer().getCenterPosition();
-        Point p = field.getChunkFromCoordinate(pos.x*Block.BLOCKWIDTH, pos.y*Block.BLOCKHEIGHT);
-        //field.getChunks().add(centerChunk);
+        Chunk centerChunk = getField().getMainPlayer().getChunk();
         int i, j;
         Chunk c;
         ListIterator<Chunk> iter;

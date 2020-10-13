@@ -37,13 +37,27 @@ public abstract class GameApplicationAdapter implements Disposable {
     public Game getGame(){
         return game;
     }
-    public final GameApplicationAdapter setGame(Game game){this.game = game; return this;}
-    public void update(){
-        getGame().update();
+    public final GameApplicationAdapter setGame(Game game){
+        this.game = game;
+        return this;
     }
+    public void update(){
+        if(game.isReady()){
+            getGame().update();
+        }
+        else{
+            //idk
+        }
+    }
+
     public void draw(SpriteBatch batch){
-        game.setSpriteBatch(batch);
-        game.draw();
+        if(game.isReady()) {
+            game.setSpriteBatch(batch);
+            game.draw();
+        }
+        else{
+            //idk
+        }
     }
 
     public OrthographicCamera getCamera(){
@@ -53,7 +67,6 @@ public abstract class GameApplicationAdapter implements Disposable {
         this.camera = camera;
         return this;
     }
-
 
     @Override
     public void dispose() {

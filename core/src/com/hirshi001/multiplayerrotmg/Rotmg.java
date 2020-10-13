@@ -22,6 +22,8 @@ public class Rotmg extends ApplicationAdapter {
 
 	public OrthographicCamera camera;
 
+
+
 	@Override
 	public void create () {
 
@@ -57,10 +59,10 @@ public class Rotmg extends ApplicationAdapter {
 	@Override
 	public void render () {
 		if(!Client.isReady()) return;
+
 		//update
 		gameApplication.update();
 		camera.update();
-
 
 		//draw
 		Gdx.gl.glClearColor(0, 0, 0, 1);
