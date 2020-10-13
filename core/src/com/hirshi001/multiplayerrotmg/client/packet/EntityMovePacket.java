@@ -7,6 +7,7 @@ public class EntityMovePacket extends Packet {
 
     Vector2 pos;
     int entityId;
+
     public void setMoveToPosition(Vector2 newPos){
         this.pos = newPos;
     }

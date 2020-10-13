@@ -222,6 +222,10 @@ public class Field implements Disposable {
         }
     }
 
+    public Map<Integer, Entity> getEntityMap(){
+        return entities;
+    }
+
     @Override
     public void dispose() {
         //t.dispose();
