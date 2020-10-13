@@ -59,7 +59,6 @@ public class Player extends MobEntity {
         inv = new Inventory(9);
         inv.setItem(new FirebalItem(), 0);
         inv.setItem(new BulletItem(), 1);
-
     }
 
     @Override

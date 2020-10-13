@@ -24,9 +24,6 @@ public class Game implements Disposable {
 
     private GameApplicationAdapter application;
 
-
-    private Client client;
-
     public Game(){  }
 
     /**
@@ -163,18 +160,6 @@ public class Game implements Disposable {
                 }
             }
         }
-    }
-
-    public Game setClient() throws Exception {
-        this.client = new Client(this);
-        new Thread(client).start();
-        while(true) {
-            try {
-                Thread.sleep(50);
-            } catch (Exception e){e.printStackTrace();}
-            if(client.isReady()) break;
-        }
-        return this;
     }
 
     @Override

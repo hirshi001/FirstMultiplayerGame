@@ -30,14 +30,14 @@ public class Client{
     private static volatile boolean isReady = false;
 
 
-    public Client(Game game, String host, int port) throws Exception {
-        this.game = game;
-        this.port = port;
-        this.host = host;
+    public static void setClient(Game game, String host, int port) throws Exception {
+        Client.game = game;
+        Client.port = port;
+        Client.host = host;
     }
 
-    public Client(Game game)throws Exception {
-        this.game = game;
+    public static void setGame(Game game){
+        Client.game = game;
     }
 
     public static void sendPacket(Packet p){

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
+import com.hirshi001.multiplayerrotmg.client.Client;
 import com.hirshi001.multiplayerrotmg.gameadapter.GameApplication;
 import com.hirshi001.multiplayerrotmg.gameadapter.GameApplicationAdapter;
 import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
@@ -23,6 +24,8 @@ public class Rotmg extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+
+
 		/* Create OrthographicCamera */
 		camera = new OrthographicCamera(size.width, size.height);
 
@@ -40,14 +43,9 @@ public class Rotmg extends ApplicationAdapter {
 		}
 		gameApplication.setCamera(camera);
 		gameApplication.startup();
-		try {
-			gameApplication.getGame().setClient();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
-
-
+		Client.setGame(gameApplication.getGame());
+		Client.run();
 	}
 
 	@Override
@@ -58,6 +56,7 @@ public class Rotmg extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+		if(!Client.isReady()) return;
 		//update
 		gameApplication.update();
 		camera.update();

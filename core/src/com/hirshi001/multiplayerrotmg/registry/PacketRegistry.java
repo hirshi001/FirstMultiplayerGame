@@ -24,10 +24,13 @@ public class PacketRegistry {
         return registration;
     }
 
+    /*
     public static <T extends PacketHandler> T registerPacketHandler(T packetHandler){
         packetHandler.setId(PACKET_HANDLER_REGISTRY.register(packetHandler));
         return packetHandler;
     }
+
+     */
 
     /*
     public static void registerPacketHandler(PacketHandler packetHandler) throws NoSuchFieldException, IllegalAccessException {

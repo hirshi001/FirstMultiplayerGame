@@ -21,14 +21,17 @@ public class GameApplication extends GameApplicationAdapter{
     @Override
     public void init() throws NoSuchFieldException, IllegalAccessException {
 
+        /*
         PacketRegistry.registerPacketHandler(new UseInventoryItemHandler());
         PacketRegistry.registerPacketHandler(new UnloadChunkHandler());
+         */
     }
 
     @Override
     public void startup(){
 
         Field field = new Field();
+        /*
         mainPlayer = new Player(new Vector2(1,1));
         field.setMainPlayer(mainPlayer);
 
@@ -36,6 +39,10 @@ public class GameApplication extends GameApplicationAdapter{
 
         getCamera().position.x = mainPlayer.getPosition().x* Block.BLOCKWIDTH;
         getCamera().position.y = mainPlayer.getPosition().y*Block.BLOCKHEIGHT;
+         */
+
+
+
 
         Game g = new GameBuilder(field).inputHandler(new InputHandler()).gameApplicationAdapter(this).build();
         setGame(g);
