@@ -17,10 +17,6 @@ public class PacketRegistry {
     public static final Registration<EntityMovePacket> ENTITY_MOVE_PACKET = registerPacket(EntityMovePacket::new, new EntityMovePacketHandler());
 
 
-
-
-
-
     public static <T extends Packet, H extends PacketHandler> Registration<T> registerPacket(Registration.ObjectCreator<T> oc, H packetHandler){
         Registration<T> registration = Registration.registerObject(oc);
         registration.setId(PACKET_REGISTRY.register(registration));
