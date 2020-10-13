@@ -99,6 +99,7 @@ public class Player extends MobEntity {
             getPosition().add(mov);
             EntityMovePacket packet = PacketRegistry.ENTITY_MOVE_PACKET.getObjectCreator().create();
             packet.setMoveToPosition(getPosition());
+            packet.setEntityId(getId());
             packet.generate();
             Client.sendPacket(packet);
         }
@@ -162,6 +163,7 @@ public class Player extends MobEntity {
         return "PLAYER at " + getPosition().toString();
     }
 
+    /*
     public void updateMob(ByteBuf buffer) {
         int updateType = buffer.readInt();
 
@@ -181,6 +183,8 @@ public class Player extends MobEntity {
                 break;
         }
     }
+
+     */
 
     @Override
     public void write(ByteBuf out) {
