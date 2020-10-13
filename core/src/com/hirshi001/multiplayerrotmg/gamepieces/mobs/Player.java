@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.hirshi001.multiplayerrotmg.client.Client;
+import com.hirshi001.multiplayerrotmg.client.packet.EntityMovePacket;
 import com.hirshi001.multiplayerrotmg.client.packet.UseInventoryItemPacket;
 import com.hirshi001.multiplayerrotmg.client.packethandlers.UseInventoryItemHandler;
 import com.hirshi001.multiplayerrotmg.gamepieces.inventory.Inventory;
@@ -21,6 +22,10 @@ import com.hirshi001.multiplayerrotmg.registry.PacketRegistry;
 import com.hirshi001.multiplayerrotmg.util.animation.AnimationCycle;
 import com.hirshi001.multiplayerrotmg.util.animation.Animator;
 import io.netty.buffer.ByteBuf;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 public class Player extends MobEntity {
 
@@ -90,13 +95,22 @@ public class Player extends MobEntity {
         if(Gdx.input.isKeyPressed(Input.Keys.S)) mov.y--;
         mov.nor().scl(0.223f);
 
-        getPosition().add(mov);
+        if(!mov.equals(Vector2.Zero)){
+            getPosition().add(mov);
+            EntityMovePacket packet = PacketRegistry.ENTITY_MOVE_PACKET.getObjectCreator().create();
+            packet.setMoveToPosition(getPosition());
+            packet.generate();
+            Client.sendPacket(packet);
+        }
 
         OrthographicCamera camera = getField().getGame().getGameApplicationAdapter().getCamera();
 
         Vector2 centerPos = getCenterPosition();
         Vector3 screenPos = camera.project(new Vector3(centerPos.x*Block.BLOCKWIDTH, centerPos.y*Block.BLOCKHEIGHT, 0));
         facingRight = screenPos.x<Gdx.input.getX();
+
+
+
 
         count++;
         if(count>10){
