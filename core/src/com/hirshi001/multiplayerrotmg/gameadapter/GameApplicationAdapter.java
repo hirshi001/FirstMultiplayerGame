@@ -50,6 +50,10 @@ public abstract class GameApplicationAdapter implements Disposable {
         }
     }
 
+    /**
+     * Draws on the screen based on the state of the client (connected to server, not connected, etc...)
+     * @param batch - the sprite batch used to draw the sprites
+     */
     public void draw(SpriteBatch batch){
         if(game.isReady()) {
             game.setSpriteBatch(batch);
@@ -60,9 +64,19 @@ public abstract class GameApplicationAdapter implements Disposable {
         }
     }
 
+    /**
+     *
+     * @return camera used in rendering
+     */
     public OrthographicCamera getCamera(){
         return this.camera;
     }
+
+    /**
+     * sets the camera used for rendering
+     * @param camera
+     * @return this object for chaining purposes
+     */
     public GameApplicationAdapter setCamera(OrthographicCamera camera){
         this.camera = camera;
         return this;

@@ -11,8 +11,10 @@ import com.hirshi001.multiplayerrotmg.gameadapter.GameApplication;
 import com.hirshi001.multiplayerrotmg.gameadapter.GameApplicationAdapter;
 import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
 import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
+import io.netty.util.internal.StringUtil;
 
 import java.awt.Dimension;
+import java.util.function.IntPredicate;
 
 public class Rotmg extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -45,7 +47,7 @@ public class Rotmg extends ApplicationAdapter {
 		}
 		gameApplication.setCamera(camera);
 		gameApplication.startup();
-
+		
 		Client.setGame(gameApplication.getGame());
 		Client.run();
 	}
