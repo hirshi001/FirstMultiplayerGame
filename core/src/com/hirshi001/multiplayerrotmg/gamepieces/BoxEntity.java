@@ -1,5 +1,6 @@
 package com.hirshi001.multiplayerrotmg.gamepieces;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.field.Chunk;
 import com.hirshi001.multiplayerrotmg.field.Field;
@@ -10,6 +11,8 @@ public abstract class BoxEntity extends Entity {
     protected Field field;
 
     private Chunk chunk;
+
+    private Rectangle boundingBox;
 
     public BoxEntity(Vector2 position, int id){
         super(position, id);

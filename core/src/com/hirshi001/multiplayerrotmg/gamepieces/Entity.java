@@ -45,7 +45,7 @@ public abstract class Entity {
     public abstract void read(ByteBuf in);
 
     /**
-     * updates the entity based on the bits in the array.
+     * called when a
      * @param in
      */
     public void update(ByteBuf in){}
