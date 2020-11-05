@@ -2,6 +2,7 @@ package com.hirshi001.multiplayerrotmg.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.math.Rectangle;
 import com.hirshi001.multiplayerrotmg.Rotmg;
 
 public class DesktopLauncher {
