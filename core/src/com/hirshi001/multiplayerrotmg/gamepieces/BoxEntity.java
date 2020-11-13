@@ -1,5 +1,6 @@
 package com.hirshi001.multiplayerrotmg.gamepieces;
 
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.field.Chunk;
@@ -16,6 +17,7 @@ public abstract class BoxEntity extends Entity {
 
     public BoxEntity(Vector2 position, int id){
         super(position, id);
+        boundingBox = new Rectangle(getPosition().x, getPosition().y, getWidth(), getHeight());
     }
 
     public BoxEntity setField(Field f){this.field = f; return this;}
@@ -36,31 +38,19 @@ public abstract class BoxEntity extends Entity {
     public abstract float getWidth();
     public abstract float getHeight();
 
-    public final boolean touchingBox(Vector2 pos, float width, float height){
-        return oneDimensionOverlap(pos.x, pos.x+width,getPosition().x, getPosition().x+getWidth(),false)
-                && oneDimensionOverlap(pos.y, pos.y+height,getPosition().y, getPosition().y+getHeight(),false);
+    public Rectangle getBoundingBox(){
+        return boundingBox;
     }
 
-    public final boolean touchingBox(Vector2 pos, float width, float height, boolean checkEdges){
-        return oneDimensionOverlap(pos.x, pos.x+width,getPosition().x, getPosition().x+getWidth(),checkEdges)
-                && oneDimensionOverlap(pos.y, pos.y+height,getPosition().y, getPosition().y+getHeight(),checkEdges);
+    @Override
+    public boolean touchingEntity(Entity e){
+        if(e instanceof BoxEntity){
+            return ((BoxEntity) e).getBoundingBox().overlaps(getBoundingBox());
+        }
+        return false;
     }
 
-    public static boolean oneDimensionOverlap(double x1, double x2, double y1, double y2, boolean checkEdges){
-        double temp;
-        if(x1>x2){
-            temp = x1;
-            x1 = x2;
-            x2 = temp;
-        }
-        if(y1>y2){
-            temp = y1;
-            y1 = y2;
-            y2 = temp;
-        }
-        if(checkEdges) return x2>=y1 && y2>=x1;
-        return  x2>y1 && y2>x1;
-    }
+
 
     @Override
     public void write(ByteBuf out) {
