@@ -14,6 +14,7 @@ import com.hirshi001.multiplayerrotmg.util.opensimplex.OpenSimplexNoise;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -23,21 +24,12 @@ import java.util.Set;
 
 public class Field implements Disposable {
 
-    private final List<MobEntity> mobs = new LinkedList<>();
-    private final Queue<MobEntity> mobsRemove = new LinkedList<>();
-    private final Queue<MobEntity> mobsAdd = new LinkedList<>();
+    private final HashMap<Integer, Entity> entities = new HashMap<Integer, Entity>();
+    private final Queue<Entity> entityRemove = new LinkedList<>();
+    private final Queue<Entity> entityAdd = new LinkedList<>();
 
-    private final List<ProjectileEntity> projectiles = new LinkedList<>();
-    private final Queue<ProjectileEntity> projectilesRemove = new LinkedList<>();
-    private final Queue<ProjectileEntity> projectilesAdd = new LinkedList<>();
-
-
-    private final List<ItemEntity> items = new LinkedList<>();
-    private final Queue<ItemEntity> itemsRemove = new LinkedList<>();
-    private final Queue<ItemEntity> itemsAdd = new LinkedList<>();
 
     private final List<Chunk> chunksLoaded = new LinkedList<>();
-    private final Map<Integer, Entity> entities = new HashMap<>();
 
     private Game game;
     private MobEntity mainPlayer;
@@ -52,9 +44,7 @@ public class Field implements Disposable {
         noise = new OpenSimplexNoise(System.currentTimeMillis());
     }
 
-    public List<MobEntity> getMobsList(){return mobs;}
-    public List<ItemEntity> getItemsList(){return items;}
-    public List<ProjectileEntity> getProjectilesList(){return projectiles;}
+    public HashMap<Integer, Entity> getEntitiesMap(){return entities;}
     public MobEntity getMainPlayer(){return mainPlayer;}
     public void setMainPlayer(MobEntity m){
         mainPlayer = m;
@@ -83,15 +73,7 @@ public class Field implements Disposable {
             c = iter.next();
             c.unloadCount--;
             if(c.unloadCount<=0){
-                for(MobEntity m:c.getMobs()){
-                    mobs.remove(m);
-                }
-                for(ItemEntity i:c.getItems()){
-                    items.remove(i);
-                }
-                for(ProjectileEntity p:c.getProjectiles()) {
-                    projectiles.remove(p);
-                }
+                c.getEntitiesMap().forEach((id, entity) -> entities.remove(id));
                 Client.sendPacket(UnloadChunkHandler.generateUnloadPacket(c.getRow(), c.getCol()));
                 iter.remove();
             }
@@ -99,28 +81,8 @@ public class Field implements Disposable {
     }
 
     private void updateEntities(){
-
-        handleMobs();
-        handleItems();
-        handleProjectiles();
-
-        updateMobs();
-        updateProjectiles();
-        for(ItemEntity e:items){ e.updateBoxEntity(); }
-
+        getEntitiesMap().forEach((id, entity) -> entity.updateTick());
     }
-
-    private void updateMobs(){
-        for(MobEntity m:mobs){ m.updateBoxEntity(); }
-        for(MobEntity m:mobs){ m.tileCollision(); }
-        for(MobEntity m:mobs){ m.mobCollision(mobs); }
-        for(MobEntity m:mobs){ m.itemTouching(items); }
-    }
-    private void updateProjectiles(){
-        for(ProjectileEntity p:projectiles){p.updateBoxEntity();}
-        for(ProjectileEntity p:projectiles){p.touchingMob(mobs);}
-    }
-
 
 
     public Chunk getChunkFromCoordinate(float x, float y){
@@ -136,94 +98,15 @@ public class Field implements Disposable {
         return null;
     }
 
-    private void handleMobs(){
-        MobEntity e;
-        while (!mobsAdd.isEmpty()) {
-            e = mobsAdd.remove();
-            e.setField(this);
-            Vector2 pos = e.getCenterPosition();
-            Chunk c = getChunkFromCoordinate(pos.x, pos.y);
-            e.setChunk(c);
-            c.addMob(e);
 
-            mobs.add(e);
-            entities.put(e.getId(), e);
-        }
-
-        while (!mobsRemove.isEmpty()) {
-            e = mobsRemove.remove();
-            mobs.remove(e);
-            entities.remove(e.getId());
-            e.getChunk().removeMob(e);
-        }
-    }
-
-    private void handleProjectiles(){
-        ProjectileEntity p;
-        while (!projectilesAdd.isEmpty()) {
-            p = projectilesAdd.remove();
-            Vector2 pos = p.getCenterPosition();
-            Chunk c = getChunkFromCoordinate(pos.x, pos.y);
-            c.addProjectile(p);
-            p.setChunk(c);
-            p.setField(this);
-
-            projectiles.add(p);
-            entities.put(p.getId(), p);
-        }
-
-        while (!projectilesRemove.isEmpty()) {
-            p = projectilesRemove.remove();
-            projectiles.remove(p);
-            entities.remove(p.getId());
-            p.getChunk().removeProjectile(p);
-        }
-    }
-    private void handleItems(){
-        ItemEntity i;
-        while (!itemsAdd.isEmpty()) {
-            i = itemsAdd.remove();
-            Vector2 pos = i.getCenterPosition();
-            Chunk c = getChunkFromCoordinate(pos.x, pos.y);
-            c.addItem(i);
-            i.setChunk(c);
-            i.setField(this);
-
-            items.add(i);
-            entities.put(i.getId(), i);
-        }
-
-        while (!itemsRemove.isEmpty()) {
-            i = itemsRemove.remove();
-            items.remove(i);
-            entities.remove(i.getId());
-            i.getChunk().removeItem(i);
-        }
-    }
-
-    public void removeMob(MobEntity m){
-        mobsRemove.add(m);
-    }
-    public void addMob(MobEntity m){mobsAdd.add(m);}
-
-    public void addProjectile(ProjectileEntity p){
-        projectilesAdd.add(p);
-    }
-    public void removeProjectile(ProjectileEntity p){projectilesRemove.add(p);}
-
-    public void removeItem(ItemEntity i){
-        itemsRemove.add(i);
-    }
-    public void addItem(ItemEntity i){itemsAdd.add(i); }
+    public void raddEntity(Entity e){ entityAdd.add(e); }
+    public void removeEntity(Entity e){ entityRemove.add(e); }
 
     public void draw(SpriteBatch batch){
         for(Chunk c:getChunks()) {
             c.drawTiles(batch);
         }
-    }
 
-    public Map<Integer, Entity> getEntityMap(){
-        return entities;
     }
 
     @Override

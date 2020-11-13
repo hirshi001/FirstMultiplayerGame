@@ -1,14 +1,19 @@
 package com.hirshi001.multiplayerrotmg.field;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.hirshi001.multiplayerrotmg.gamepieces.Entity;
 import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 import com.hirshi001.multiplayerrotmg.registry.BlockRegistry;
 import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Chunk {
 
@@ -16,11 +21,8 @@ public class Chunk {
     private short[][] tiles;
     private int row, col;
 
-    private final List<MobEntity> mobs = new LinkedList<>();
 
-    private final List<ProjectileEntity> projectiles = new LinkedList<>();
-
-    private final List<ItemEntity> items = new LinkedList<>();
+    private final HashMap<Integer, Entity> entities = new HashMap<Integer, Entity>();
 
     public int unloadCount = 0;
 
@@ -37,22 +39,15 @@ public class Chunk {
 
         for(r=0;r<tiles.length;r++){
             for(c=0;c<tiles.length;c++){
-                batch.draw(BlockRegistry.BLOCK_REGISTRY.getObject(tiles[r][c]).getTexture(),chunkPosCol + c  * Block.BLOCKHEIGHT,chunkPosRow+ r * Block.BLOCKHEIGHT);
+                batch.draw(BlockRegistry.BLOCK_REGISTRY.getRegistration(tiles[r][c]).getTexture(),chunkPosCol + c  * Block.BLOCKHEIGHT,chunkPosRow+ r * Block.BLOCKHEIGHT);
             }
         }
     }
 
-    public void addMob(MobEntity m){ mobs.add(m);}
-    public void removeMob(MobEntity m) {mobs.remove(m);}
-    public List<MobEntity> getMobs(){return mobs;}
 
-    public void addProjectile(ProjectileEntity p){ projectiles.add(p);}
-    public void removeProjectile(ProjectileEntity p) {projectiles.remove(p);}
-    public List<ProjectileEntity> getProjectiles(){return projectiles;}
-
-    public void addItem(ItemEntity i){ items.add(i);}
-    public void removeItem(ItemEntity i) {items.remove(i);}
-    public List<ItemEntity> getItems(){return items;}
+    public void addEntity(Entity e){ entities.put(e.getId(), e); }
+    public void removeEntity(Entity e) { entities.remove(e.getId()); }
+    public Map<Integer, Entity> getEntitiesMap(){return entities;}
 
     public short[][] getTiles() {
         return tiles;
