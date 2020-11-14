@@ -2,12 +2,15 @@ package com.hirshi001.multiplayerrotmg.util.bytewritable;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 public class ByteWritableMap implements Map<String, ByteWritable>{
 
     private HashMap<String, ByteWritable> map = new HashMap<>();
+    public final Queue<String> updated = new LinkedList<>();
 
     public void putInt(String tag, int i){
         this.put(tag, IntegerByteWritable.valueOf(i));
@@ -35,63 +38,64 @@ public class ByteWritableMap implements Map<String, ByteWritable>{
 
     @Override
     public int size() {
-        return map.size();
+        return this.map.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return map.isEmpty();
+        return this.map.isEmpty();
     }
 
     @Override
     public boolean containsKey(Object key) {
-        return map.containsKey(key);
+        return this.map.containsKey(key);
     }
 
     @Override
     public boolean containsValue(Object value) {
-        return map.containsValue(value);
+        return this.map.containsValue(value);
     }
 
     @Override
     public ByteWritable get(Object key) {
-        return map.get(key);
+        return this.map.get(key);
     }
 
     @Override
     public ByteWritable put(String key, ByteWritable value) {
-        return map.put(key, value);
+        this.updated.add(key);
+        return this.map.put(key, value);
     }
 
     @Override
     public ByteWritable remove(Object key) {
-        return map.remove(key);
+        return this.map.remove(key);
     }
 
     @Override
     public void putAll(Map<? extends String, ? extends ByteWritable> m) {
         for(Map.Entry<? extends String, ? extends ByteWritable> entry:m.entrySet()){
-            put(entry.getKey(), entry.getValue());
+            this.put(entry.getKey(), entry.getValue());
         }
     }
 
     @Override
     public void clear() {
-        map.clear();
+        this.map.clear();
     }
 
     @Override
     public Set<String> keySet() {
-        return map.keySet();
+        return this.map.keySet();
     }
 
     @Override
     public Collection<ByteWritable> values() {
-        return map.values();
+        return this.map.values();
     }
 
     @Override
     public Set<Entry<String, ByteWritable>> entrySet() {
-        return map.entrySet();
+        return this.map.entrySet();
     }
 }

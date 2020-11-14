@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.field.Chunk;
 import com.hirshi001.multiplayerrotmg.util.bytewritable.ByteWritable;
+import com.hirshi001.multiplayerrotmg.util.bytewritable.ByteWritableMap;
 import io.netty.buffer.ByteBuf;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public abstract class Entity {
     private Vector2 pos;
 
     private int id;
+
+    private ByteWritableMap data;
 
     public Entity(Vector2 pos, int id){ this.pos = pos; this.id = id;}
 
@@ -35,6 +38,11 @@ public abstract class Entity {
      * Different subclasses may implement this style of this method differently, perhaps creating other update methods.
      */
     public void tick(){}
+
+    private void updateData(ByteWritableMap data){
+        data.putFloat("x",pos.x);
+        data.putFloat("y", pos.y);
+    }
 
     /**
      * Writes to a ByteBuf all the necessary information needed to load the entity.
@@ -76,6 +84,7 @@ public abstract class Entity {
     public int getId() {
         return id;
     }
+
 
 
     ///EVENTS
