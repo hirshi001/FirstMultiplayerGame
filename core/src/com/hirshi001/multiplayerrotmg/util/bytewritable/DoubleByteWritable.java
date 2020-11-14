@@ -6,12 +6,11 @@ public class DoubleByteWritable implements ByteWritable {
 
     public static int id;
 
-    private double value;
+    public double value;
     byte[] bytes;
 
     public DoubleByteWritable(double d){
         this.value = d;
-        bytes = ByteBuffer.allocate(8).putDouble(d).array();
     }
 
     public static DoubleByteWritable valueOf(double f){
@@ -29,6 +28,7 @@ public class DoubleByteWritable implements ByteWritable {
 
     @Override
     public byte[] toBytes() {
+        bytes = ByteBuffer.allocate(8).putDouble(value).array();
         return bytes;
     }
 

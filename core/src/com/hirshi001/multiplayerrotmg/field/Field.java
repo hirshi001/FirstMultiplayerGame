@@ -7,12 +7,15 @@ import com.hirshi001.multiplayerrotmg.client.packethandlers.UnloadChunkHandler;
 import com.hirshi001.multiplayerrotmg.game.Game;
 import com.hirshi001.multiplayerrotmg.gamepieces.Entity;
 import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
+import com.hirshi001.multiplayerrotmg.registry.PacketRegistry;
+import com.hirshi001.multiplayerrotmg.util.bytewritable.ByteWritable;
 import com.hirshi001.multiplayerrotmg.util.opensimplex.OpenSimplexNoise;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Queue;
 
 public class Field implements Disposable {
@@ -75,6 +78,12 @@ public class Field implements Disposable {
 
     private void updateEntities(){
         getEntitiesMap().forEach((id, entity) -> entity.tick());
+        getEntitiesMap().forEach((id, entity) -> {
+            entity.updateData();
+            for(String updated: entity.getData().updated){
+                PacketRegistry.
+            }
+        });
     }
 
 

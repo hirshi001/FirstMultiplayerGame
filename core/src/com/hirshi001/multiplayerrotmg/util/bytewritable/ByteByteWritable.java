@@ -6,6 +6,8 @@ public class ByteByteWritable implements ByteWritable{
 
     private byte[] bytes;
 
+    public static int id;
+
     public ByteByteWritable(byte b){
         this.bytes = new byte[]{b};
     }

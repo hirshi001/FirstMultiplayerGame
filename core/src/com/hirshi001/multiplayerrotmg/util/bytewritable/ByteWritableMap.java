@@ -36,6 +36,10 @@ public class ByteWritableMap implements Map<String, ByteWritable>{
         this.put(tag, DoubleByteWritable.valueOf(d));
     }
 
+    public double getDouble(String tag){
+        return ((DoubleByteWritable)this.map.get(tag)).value;
+    }
+
     @Override
     public int size() {
         return this.map.size();

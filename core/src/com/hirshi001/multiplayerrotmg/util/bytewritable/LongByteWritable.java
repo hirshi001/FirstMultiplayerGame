@@ -8,14 +8,6 @@ public class LongByteWritable implements ByteWritable {
 
     public LongByteWritable(long l){
         this.value = l;
-        bytes[0] = (byte)value;
-        bytes[1] = (byte)(value>>4);
-        bytes[2] = (byte)(value>>8);
-        bytes[3] = (byte)(value>>12);
-        bytes[4] = (byte)(value>>16);
-        bytes[5] = (byte)(value>>20);
-        bytes[6] = (byte)(value>>24);
-        bytes[7] = (byte)(value>>28);
     }
 
     public static LongByteWritable valueOf(long l){
@@ -33,6 +25,14 @@ public class LongByteWritable implements ByteWritable {
 
     @Override
     public byte[] toBytes() {
+        bytes[0] = (byte)value;
+        bytes[1] = (byte)(value>>4);
+        bytes[2] = (byte)(value>>8);
+        bytes[3] = (byte)(value>>12);
+        bytes[4] = (byte)(value>>16);
+        bytes[5] = (byte)(value>>20);
+        bytes[6] = (byte)(value>>24);
+        bytes[7] = (byte)(value>>28);
         return bytes;
     }
 

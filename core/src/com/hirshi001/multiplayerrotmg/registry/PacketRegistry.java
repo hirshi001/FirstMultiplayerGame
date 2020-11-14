@@ -2,6 +2,7 @@ package com.hirshi001.multiplayerrotmg.registry;
 
 
 import com.hirshi001.multiplayerrotmg.client.packet.Packet;
+import com.hirshi001.multiplayerrotmg.client.packet.UpdateEntityPacket;
 import com.hirshi001.multiplayerrotmg.client.packet.UseInventoryItemPacket;
 import com.hirshi001.multiplayerrotmg.client.packethandlers.PacketHandler;
 import com.hirshi001.multiplayerrotmg.client.packethandlers.SpawnProjectileHandler;
@@ -12,6 +13,7 @@ public class PacketRegistry {
     public static final ExpandableRegistry<PacketHandler> PACKET_HANDLER_REGISTRY = new ExpandableRegistry<PacketHandler>();
 
     public static final Registration<UseInventoryItemPacket> USE_ONE_PACKET = registerPacket(UseInventoryItemPacket::new, new SpawnProjectileHandler());
+    public static final Registration<UpdateEntityPacket> UPDATE_ENTITY_PACKET = registerPacket(UpdateEntityPacket::new, new UpdateEntityPacketHandler());
 
     public static <T extends Packet, H extends PacketHandler> Registration<T> registerPacket(Registration.ObjectCreator<T> oc, H packetHandler){
         Registration<T> registration = Registration.registerObject(oc);

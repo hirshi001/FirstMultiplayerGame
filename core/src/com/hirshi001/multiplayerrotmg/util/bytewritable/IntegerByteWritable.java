@@ -11,10 +11,6 @@ public class IntegerByteWritable implements ByteWritable {
 
     public IntegerByteWritable(int i){
         this.value = i;
-        bytes[0] = (byte)value;
-        bytes[1] = (byte)(value>>4);
-        bytes[2] = (byte)(value>>8);
-        bytes[3] = (byte)(value>>12);
     }
 
     public static IntegerByteWritable valueOf(int i){
@@ -34,6 +30,10 @@ public class IntegerByteWritable implements ByteWritable {
 
     @Override
     public byte[] toBytes() {
+        bytes[0] = (byte)value;
+        bytes[1] = (byte)(value>>4);
+        bytes[2] = (byte)(value>>8);
+        bytes[3] = (byte)(value>>12);
         return bytes;
     }
 

@@ -6,12 +6,11 @@ public class FloatByteWritable implements ByteWritable {
 
     public static int id;
 
-    private float value;
+    public float value;
     byte[] bytes;
 
     public FloatByteWritable(float f){
         this.value = f;
-        bytes = ByteBuffer.allocate(4).putFloat(f).array();
     }
 
     public static FloatByteWritable valueOf(Float f){
@@ -29,6 +28,7 @@ public class FloatByteWritable implements ByteWritable {
 
     @Override
     public byte[] toBytes() {
+        bytes = ByteBuffer.allocate(4).putFloat(value).array();
         return bytes;
     }
 

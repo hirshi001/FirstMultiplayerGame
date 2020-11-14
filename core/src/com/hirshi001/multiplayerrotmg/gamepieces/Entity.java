@@ -32,14 +32,32 @@ public abstract class Entity {
     public abstract Chunk getChunk();
     public abstract void setChunk(Chunk chunk);
 
+    public ByteWritableMap getData(){
+        return data;
+    }
+
     /**
      * When called on the client side, this method generally wont have any functionality.
      * This is the only "Update" method that will be called by the game system internally (field/chunk).
      * Different subclasses may implement this style of this method differently, perhaps creating other update methods.
      */
-    public void tick(){}
+    public void tick(){
+    }
 
-    private void updateData(ByteWritableMap data){
+    /**
+     * This method should be called after all the calculations in the tick.
+     */
+    public void updateData(){
+        updateData(data);
+    }
+
+    /**
+     * Used for writing the information of an entity to a map in which the updated information is sent from the server
+     * to client through packets. This is not used for sending updates from client to server, which may be needed for
+     * updating player data.
+     * @param data
+     */
+    protected void updateData(ByteWritableMap data){
         data.putFloat("x",pos.x);
         data.putFloat("y", pos.y);
     }

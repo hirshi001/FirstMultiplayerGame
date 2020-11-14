@@ -20,6 +20,7 @@ import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
 import com.hirshi001.multiplayerrotmg.registry.PacketRegistry;
 import com.hirshi001.multiplayerrotmg.util.animation.AnimationCycle;
 import com.hirshi001.multiplayerrotmg.util.animation.Animator;
+import com.hirshi001.multiplayerrotmg.util.bytewritable.ByteWritableMap;
 import io.netty.buffer.ByteBuf;
 
 import java.util.ArrayList;
@@ -176,6 +177,12 @@ public class Player extends MobEntity {
     }
 
      */
+
+    @Override
+    protected void updateData(ByteWritableMap data) {
+        super.updateData(data);
+        data.putBoolean("facingRight", facingRight);
+    }
 
     @Override
     public void write(ByteBuf out) {
