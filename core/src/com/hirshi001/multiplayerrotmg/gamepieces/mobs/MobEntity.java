@@ -76,9 +76,7 @@ public abstract class MobEntity extends BoxEntity {
     @Override
     public void updateBoxEntity(){
         lastPosition.set(getPosition());
-        updateTick();
     }
-    public abstract void updateTick();
 
     @Override
     public MobEntity setField(Field f) {
@@ -197,20 +195,7 @@ public abstract class MobEntity extends BoxEntity {
     }
 
 
-    public boolean touchingEntity(BoxEntity e){
-        return touchingBox(e.getPosition(),e.getWidth(), e.getHeight());
-    }
-
-    public void mobCollision(List<MobEntity> mobs){
-        for(MobEntity e:mobs){
-            if(touchingEntity(e)){
-                if(e==this) continue;
-                onMobCollision(e);
-            }
-        }
-    }
-
-    protected void onMobCollision(MobEntity e) {
+    protected void onTouchingEntity(MobEntity e) {
         Random r = new Random();
         if(e.getCenterPosition().equals(getCenterPosition())){
             getLastPosition().set(getPosition());

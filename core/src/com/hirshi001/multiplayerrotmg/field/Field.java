@@ -1,26 +1,19 @@
 package com.hirshi001.multiplayerrotmg.field;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import com.hirshi001.multiplayerrotmg.client.Client;
 import com.hirshi001.multiplayerrotmg.client.packethandlers.UnloadChunkHandler;
 import com.hirshi001.multiplayerrotmg.game.Game;
 import com.hirshi001.multiplayerrotmg.gamepieces.Entity;
 import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
-import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
-import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 import com.hirshi001.multiplayerrotmg.util.opensimplex.OpenSimplexNoise;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Map;
 import java.util.Queue;
-import java.util.Set;
 
 public class Field implements Disposable {
 
@@ -81,7 +74,7 @@ public class Field implements Disposable {
     }
 
     private void updateEntities(){
-        getEntitiesMap().forEach((id, entity) -> entity.updateTick());
+        getEntitiesMap().forEach((id, entity) -> entity.tick());
     }
 
 

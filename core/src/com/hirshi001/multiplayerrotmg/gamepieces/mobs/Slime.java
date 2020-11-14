@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.hirshi001.multiplayerrotmg.gamepieces.Entity;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
 import com.hirshi001.multiplayerrotmg.field.Block;
 import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
@@ -12,7 +13,9 @@ import com.hirshi001.multiplayerrotmg.util.animation.AnimationCycle;
 import com.hirshi001.multiplayerrotmg.util.animation.Animator;
 import io.netty.buffer.ByteBuf;
 
+import java.util.ConcurrentModificationException;
 import java.util.List;
+import java.util.Map;
 
 public class Slime extends MobEntity {
 
@@ -69,10 +72,9 @@ public class Slime extends MobEntity {
 
 
     @Override
-    public void updateTick() {
-       moveToMaster();
-
-
+    public void tick() {
+        super.tick();
+        moveToMaster();
         count++;
         if(count>12){
             cycle.cycle();
@@ -85,11 +87,11 @@ public class Slime extends MobEntity {
         if(updateCount<0){
             updateCount=60*5;
             master = getField().getMainPlayer();
-            List<MobEntity> mobs = getField().getMobsList();
-            for(MobEntity m:mobs){
-                if(m instanceof Player && m.getCenterPosition().dst2(getCenterPosition())<400){
-                    master = m;
-                    break;
+            Map<Integer, Entity> mobs = getField().getEntitiesMap();
+            for (Map.Entry<Integer, Entity> entry : mobs.entrySet()) {
+                Entity e = entry.getValue();
+                if(e instanceof Player && ((Player) e).getCenterPosition().dst2(getCenterPosition())<400){
+                    master = (Player)e;
                 }
             }
         }

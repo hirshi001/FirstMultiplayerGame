@@ -26,10 +26,10 @@ public abstract class ProjectileEntity extends BoxEntity {
 
     @Override
     public void updateBoxEntity() {
-        updateTick();
+        tick();
     }
 
-    public abstract void updateTick();
+    public abstract void tick();
 
     public abstract void drawProjectile(SpriteBatch batch);
 

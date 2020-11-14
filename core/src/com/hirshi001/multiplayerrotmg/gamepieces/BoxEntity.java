@@ -29,11 +29,23 @@ public abstract class BoxEntity extends Entity {
         return this;
     }
 
+    @Override
+    public void tick() {
+        super.tick();
+        getField().getEntitiesMap().forEach((id, entity) -> {
+            if(this.touchingEntity(entity)){
+                onTouchingEntity(entity);
+            }
+        });
+    }
+
     /**
      * The updateBoxEntity() method is generally used for updating movement.
      * The update() method is for checking collision and other events.
      */
-    public abstract void updateBoxEntity();
+    public void updateBoxEntity(){
+
+    }
 
     public abstract float getWidth();
     public abstract float getHeight();

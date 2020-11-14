@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.hirshi001.multiplayerrotmg.client.Client;
-import com.hirshi001.multiplayerrotmg.client.packet.EntityMovePacket;
 import com.hirshi001.multiplayerrotmg.client.packet.UseInventoryItemPacket;
 import com.hirshi001.multiplayerrotmg.client.packethandlers.UseInventoryItemHandler;
 import com.hirshi001.multiplayerrotmg.gamepieces.inventory.Inventory;
@@ -83,10 +82,14 @@ public class Player extends MobEntity {
     @Override
     public void onItemTouching(ItemEntity i){ }
 
+
+
+
     private int count = 0;
 
     @Override
-    public void updateTick() {
+    public void tick() {
+        super.tick();
         Vector2 mov = Vector2.Zero.cpy();
         if(Gdx.input.isKeyPressed(Input.Keys.D)) mov.x++;
         if(Gdx.input.isKeyPressed(Input.Keys.A)) mov.x--;
@@ -96,11 +99,6 @@ public class Player extends MobEntity {
 
         if(!mov.equals(Vector2.Zero)){
             getPosition().add(mov);
-            EntityMovePacket packet = PacketRegistry.ENTITY_MOVE_PACKET.getObjectCreator().create();
-            packet.setMoveToPosition(getPosition());
-            packet.setEntityId(getId());
-            packet.generate();
-            Client.sendPacket(packet);
         }
 
         OrthographicCamera camera = getField().getGame().getGameApplicationAdapter().getCamera();
@@ -150,12 +148,6 @@ public class Player extends MobEntity {
         return this;
     }
 
-    @Override
-    protected void onMobCollision(MobEntity e) {
-        if(!(e instanceof Slime)){
-            super.onMobCollision(e);
-        }
-    }
 
     @Override
     public String toString() {

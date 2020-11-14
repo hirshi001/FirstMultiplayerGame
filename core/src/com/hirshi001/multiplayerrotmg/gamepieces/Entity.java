@@ -3,13 +3,15 @@ package com.hirshi001.multiplayerrotmg.gamepieces;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.field.Chunk;
+import com.hirshi001.multiplayerrotmg.util.bytewritable.ByteWritable;
 import io.netty.buffer.ByteBuf;
 
 import java.util.List;
+import java.util.Map;
 
 public abstract class Entity {
 
-    protected Map<String, Stuff> entityData;
+    protected Map<String, ByteWritable> entityData;
 
     private Vector2 pos;
 
@@ -32,7 +34,7 @@ public abstract class Entity {
      * This is the only "Update" method that will be called by the game system internally (field/chunk).
      * Different subclasses may implement this style of this method differently, perhaps creating other update methods.
      */
-    public abstract void updateTick();
+    public void tick(){}
 
     /**
      * Writes to a ByteBuf all the necessary information needed to load the entity.
@@ -74,4 +76,8 @@ public abstract class Entity {
     public int getId() {
         return id;
     }
+
+
+    ///EVENTS
+    public void onTouchingEntity(Entity e){}
 }

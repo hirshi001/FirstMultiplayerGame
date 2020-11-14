@@ -76,7 +76,7 @@ public abstract class StraightLineProjectile extends ProjectileEntity {
     }
 
     @Override
-    public void updateTick() {
+    public void tick() {
         getPosition().add(angle);
     }
 
