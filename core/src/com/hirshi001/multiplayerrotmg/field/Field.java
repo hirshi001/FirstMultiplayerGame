@@ -3,6 +3,7 @@ package com.hirshi001.multiplayerrotmg.field;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 import com.hirshi001.multiplayerrotmg.client.Client;
+import com.hirshi001.multiplayerrotmg.client.packet.UpdateEntityPacket;
 import com.hirshi001.multiplayerrotmg.client.packethandlers.UnloadChunkHandler;
 import com.hirshi001.multiplayerrotmg.game.Game;
 import com.hirshi001.multiplayerrotmg.gamepieces.Entity;
@@ -81,7 +82,11 @@ public class Field implements Disposable {
         getEntitiesMap().forEach((id, entity) -> {
             entity.updateData();
             for(String updated: entity.getData().updated){
-                PacketRegistry.
+               UpdateEntityPacket packet =  PacketRegistry.UPDATE_ENTITY_PACKET.getObjectCreator().create();
+               packet.setEntityId(id);
+               packet.updateCall(updated, entity.getData().get(updated));
+               packet.generate();
+               Client.sendPacket(packet);
             }
         });
     }

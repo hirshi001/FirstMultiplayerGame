@@ -46,7 +46,8 @@ public class UpdateEntityPacketHandler extends PacketHandler {
                 return FloatByteWritable.valueOf(b.readFloat());
             case 5: //Double
                 return DoubleByteWritable.valueOf(b.readDouble());
-
+            default:
+                return ByteByteWritable.valueOf((byte)0);
         }
     }
 
