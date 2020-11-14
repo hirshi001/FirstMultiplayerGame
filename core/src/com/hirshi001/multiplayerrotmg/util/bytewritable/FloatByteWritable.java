@@ -4,8 +4,6 @@ import java.nio.ByteBuffer;
 
 public class FloatByteWritable implements ByteWritable {
 
-    public static int id;
-
     public float value;
     byte[] bytes;
 
@@ -34,6 +32,6 @@ public class FloatByteWritable implements ByteWritable {
 
     @Override
     public int getId() {
-        return id;
+        return 4;
     }
 }

@@ -2,8 +2,6 @@ package com.hirshi001.multiplayerrotmg.util.bytewritable;
 
 public class IntegerByteWritable implements ByteWritable {
 
-    public static int id;
-
     private int value;
     byte[] bytes = new byte[4];
 
@@ -39,6 +37,6 @@ public class IntegerByteWritable implements ByteWritable {
 
     @Override
     public int getId() {
-        return id;
+        return 2;
     }
 }

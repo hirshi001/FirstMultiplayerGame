@@ -4,8 +4,6 @@ import java.nio.ByteBuffer;
 
 public class DoubleByteWritable implements ByteWritable {
 
-    public static int id;
-
     public double value;
     byte[] bytes;
 
@@ -34,6 +32,6 @@ public class DoubleByteWritable implements ByteWritable {
 
     @Override
     public int getId() {
-        return id;
+        return 5;
     }
 }

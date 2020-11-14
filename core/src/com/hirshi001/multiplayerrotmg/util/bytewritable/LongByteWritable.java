@@ -1,8 +1,6 @@
 package com.hirshi001.multiplayerrotmg.util.bytewritable;
 
 public class LongByteWritable implements ByteWritable {
-    public static int id;
-
     private long value;
     byte[] bytes = new byte[8];
 
@@ -38,6 +36,6 @@ public class LongByteWritable implements ByteWritable {
 
     @Override
     public int getId() {
-        return id;
+        return 3;
     }
 }
