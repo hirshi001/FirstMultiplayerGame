@@ -10,22 +10,16 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.hirshi001.multiplayerrotmg.client.Client;
 import com.hirshi001.multiplayerrotmg.client.packet.UseInventoryItemPacket;
-import com.hirshi001.multiplayerrotmg.client.packethandlers.UseInventoryItemHandler;
 import com.hirshi001.multiplayerrotmg.gamepieces.inventory.Inventory;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
-import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.Bullet;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 import com.hirshi001.multiplayerrotmg.field.Block;
-import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
-import com.hirshi001.multiplayerrotmg.registry.PacketRegistry;
+import com.hirshi001.multiplayerrotmg.registry.registrations.DisposableRegistry;
+import com.hirshi001.multiplayerrotmg.registry.registrations.PacketRegistry;
 import com.hirshi001.multiplayerrotmg.util.animation.AnimationCycle;
 import com.hirshi001.multiplayerrotmg.util.animation.Animator;
 import com.hirshi001.multiplayerrotmg.util.bytewritable.ByteWritableMap;
 import io.netty.buffer.ByteBuf;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
 
 public class Player extends MobEntity {
 
@@ -127,7 +121,7 @@ public class Player extends MobEntity {
             Vector2 usePos = new Vector2(dir3.x, dir3.y);
             //Vector2 dir = getCenterPosition().scl(Block.BLOCKWIDTH, Block.BLOCKHEIGHT).sub(dir3.x, dir3.y).rotate(180+(int)(Math.random()*20)-10);
 
-            UseInventoryItemPacket packet = PacketRegistry.USE_ONE_PACKET.getObjectCreator().create();
+            UseInventoryItemPacket packet = PacketRegistry.USE_ONE_PACKET.getSupplier().get();
 
             packet.setId(PacketRegistry.USE_ONE_PACKET.getId());
             packet.setItem(inv.getItem(currentInvItem));

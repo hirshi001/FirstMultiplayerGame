@@ -6,6 +6,7 @@ import com.hirshi001.multiplayerrotmg.field.Field;
 import com.hirshi001.multiplayerrotmg.gamepieces.BoxEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
+import com.hirshi001.multiplayerrotmg.util.bytewritable.ByteWritableMap;
 import io.netty.buffer.ByteBuf;
 
 import java.util.List;
@@ -217,6 +218,12 @@ public abstract class MobEntity extends BoxEntity {
             i++;
             tileCollision();
         }
+    }
+
+    @Override
+    protected void updateData(ByteWritableMap data) {
+        super.updateData(data);
+        data.putInt("health", health);
     }
 
     public void itemTouching(List<ItemEntity> items){

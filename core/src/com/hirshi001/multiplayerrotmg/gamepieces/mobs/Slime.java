@@ -7,13 +7,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.gamepieces.Entity;
 import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
 import com.hirshi001.multiplayerrotmg.field.Block;
-import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
-import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
+import com.hirshi001.multiplayerrotmg.registry.registrations.DisposableRegistry;
 import com.hirshi001.multiplayerrotmg.util.animation.AnimationCycle;
 import com.hirshi001.multiplayerrotmg.util.animation.Animator;
-import io.netty.buffer.ByteBuf;
 
-import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Map;
 

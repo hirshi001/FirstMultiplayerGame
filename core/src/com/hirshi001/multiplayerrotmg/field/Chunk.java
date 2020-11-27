@@ -2,17 +2,9 @@ package com.hirshi001.multiplayerrotmg.field;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.hirshi001.multiplayerrotmg.gamepieces.Entity;
-import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
-import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
-import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
-import com.hirshi001.multiplayerrotmg.registry.BlockRegistry;
-import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
+import com.hirshi001.multiplayerrotmg.registry.registrations.BlockRegistry;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 public class Chunk {

@@ -1,4 +1,6 @@
-package com.hirshi001.multiplayerrotmg.registry;
+package com.hirshi001.multiplayerrotmg.registry.registries;
+
+import com.hirshi001.multiplayerrotmg.registry.registries.Registry;
 
 import java.util.ArrayList;
 

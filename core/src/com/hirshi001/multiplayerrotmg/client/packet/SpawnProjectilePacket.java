@@ -1,8 +1,6 @@
 package com.hirshi001.multiplayerrotmg.client.packet;
 
-import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
-import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 

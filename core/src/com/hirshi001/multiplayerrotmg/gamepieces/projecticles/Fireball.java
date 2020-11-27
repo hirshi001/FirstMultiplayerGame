@@ -6,9 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.projectiletypes.StraightLineProjectile;
 import com.hirshi001.multiplayerrotmg.field.Block;
-import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
-import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
-import com.hirshi001.multiplayerrotmg.registry.Registry;
+import com.hirshi001.multiplayerrotmg.registry.registrations.DisposableRegistry;
 
 public class Fireball extends StraightLineProjectile {
 

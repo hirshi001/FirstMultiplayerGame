@@ -1,22 +1,27 @@
-package com.hirshi001.multiplayerrotmg.registry;
+package com.hirshi001.multiplayerrotmg.registry.registrations;
 
 
 import com.hirshi001.multiplayerrotmg.client.packet.Packet;
 import com.hirshi001.multiplayerrotmg.client.packet.UpdateEntityPacket;
 import com.hirshi001.multiplayerrotmg.client.packet.UseInventoryItemPacket;
 import com.hirshi001.multiplayerrotmg.client.packethandlers.PacketHandler;
-import com.hirshi001.multiplayerrotmg.client.packethandlers.SpawnProjectileHandler;
+import com.hirshi001.multiplayerrotmg.client.packethandlers.UpdateEntityPacketHandler;
+import com.hirshi001.multiplayerrotmg.client.packethandlers.UseInventoryItemHandler;
+import com.hirshi001.multiplayerrotmg.registry.registries.ExpandableRegistry;
+import com.hirshi001.multiplayerrotmg.registry.registrysuppliers.RegistrationSupplier;
+
+import java.util.function.Supplier;
 
 public class PacketRegistry {
 
-    public static final ExpandableRegistry<Registration<? extends Packet>> PACKET_REGISTRY = new ExpandableRegistry<Registration<? extends Packet>>();
+    public static final ExpandableRegistry<RegistrationSupplier<? extends Packet>> PACKET_REGISTRY = new ExpandableRegistry<>();
     public static final ExpandableRegistry<PacketHandler> PACKET_HANDLER_REGISTRY = new ExpandableRegistry<PacketHandler>();
 
-    public static final Registration<UseInventoryItemPacket> USE_ONE_PACKET = registerPacket(UseInventoryItemPacket::new, new SpawnProjectileHandler());
-    public static final Registration<UpdateEntityPacket> UPDATE_ENTITY_PACKET = registerPacket(UpdateEntityPacket::new, new UpdateEntityPacketHandler());
+    public static final RegistrationSupplier<UseInventoryItemPacket> USE_ONE_PACKET = registerPacket(UseInventoryItemPacket::new, new UseInventoryItemHandler());
+    public static final RegistrationSupplier<UpdateEntityPacket> UPDATE_ENTITY_PACKET = registerPacket(UpdateEntityPacket::new, new UpdateEntityPacketHandler());
 
-    public static <T extends Packet, H extends PacketHandler> Registration<T> registerPacket(Registration.ObjectCreator<T> oc, H packetHandler){
-        Registration<T> registration = Registration.registerObject(oc);
+    public static <T extends Packet> RegistrationSupplier<T> registerPacket(Supplier<T> supplier, PacketHandler packetHandler){
+        RegistrationSupplier<T> registration = new RegistrationSupplier<>(supplier);
         registration.setId(PACKET_REGISTRY.register(registration));
         packetHandler.setId(PACKET_HANDLER_REGISTRY.register(packetHandler));
         return registration;

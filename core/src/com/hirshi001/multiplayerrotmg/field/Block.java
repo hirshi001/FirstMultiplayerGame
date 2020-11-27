@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Disposable;
-import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
+import com.hirshi001.multiplayerrotmg.registry.registrations.DisposableRegistry;
 
 public class Block implements Disposable {
 

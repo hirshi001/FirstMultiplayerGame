@@ -1,4 +1,4 @@
-package com.hirshi001.multiplayerrotmg.registry;
+package com.hirshi001.multiplayerrotmg.registry.registrations;
 
 import com.badlogic.gdx.utils.Disposable;
 

@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
 import com.hirshi001.multiplayerrotmg.field.Block;
-import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
+import com.hirshi001.multiplayerrotmg.registry.registrations.DisposableRegistry;
 import io.netty.buffer.ByteBuf;
 
 public class Sword extends ItemEntity {

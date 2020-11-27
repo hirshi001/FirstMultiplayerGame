@@ -2,17 +2,11 @@ package com.hirshi001.multiplayerrotmg.gameadapter;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.hirshi001.multiplayerrotmg.client.packethandlers.UseInventoryItemHandler;
-import com.hirshi001.multiplayerrotmg.client.packethandlers.UnloadChunkHandler;
 import com.hirshi001.multiplayerrotmg.field.Field;
 import com.hirshi001.multiplayerrotmg.game.Game;
 import com.hirshi001.multiplayerrotmg.game.GameBuilder;
 import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
-import com.hirshi001.multiplayerrotmg.gamepieces.mobs.Player;
 import com.hirshi001.multiplayerrotmg.inputhandlers.InputHandler;
-import com.hirshi001.multiplayerrotmg.field.Block;
-import com.hirshi001.multiplayerrotmg.registry.PacketRegistry;
 
 public class GameApplication extends GameApplicationAdapter{
 

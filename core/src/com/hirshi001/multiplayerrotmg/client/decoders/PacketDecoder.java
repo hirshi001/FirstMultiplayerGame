@@ -2,7 +2,7 @@ package com.hirshi001.multiplayerrotmg.client.decoders;
 
 import com.hirshi001.multiplayerrotmg.client.packet.Packet;
 import com.hirshi001.multiplayerrotmg.game.Game;
-import com.hirshi001.multiplayerrotmg.registry.PacketRegistry;
+import com.hirshi001.multiplayerrotmg.registry.registrations.PacketRegistry;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;

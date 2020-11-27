@@ -8,15 +8,13 @@ import com.hirshi001.multiplayerrotmg.client.packethandlers.UnloadChunkHandler;
 import com.hirshi001.multiplayerrotmg.game.Game;
 import com.hirshi001.multiplayerrotmg.gamepieces.Entity;
 import com.hirshi001.multiplayerrotmg.gamepieces.mobs.MobEntity;
-import com.hirshi001.multiplayerrotmg.registry.PacketRegistry;
-import com.hirshi001.multiplayerrotmg.util.bytewritable.ByteWritable;
+import com.hirshi001.multiplayerrotmg.registry.registrations.PacketRegistry;
 import com.hirshi001.multiplayerrotmg.util.opensimplex.OpenSimplexNoise;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Map;
 import java.util.Queue;
 
 public class Field implements Disposable {
@@ -82,7 +80,7 @@ public class Field implements Disposable {
         getEntitiesMap().forEach((id, entity) -> {
             entity.updateData();
             for(String updated: entity.getData().updated){
-               UpdateEntityPacket packet =  PacketRegistry.UPDATE_ENTITY_PACKET.getObjectCreator().create();
+               UpdateEntityPacket packet =  PacketRegistry.UPDATE_ENTITY_PACKET.getSupplier().get();
                packet.setEntityId(id);
                packet.updateCall(updated, entity.getData().get(updated));
                packet.generate();
@@ -106,7 +104,7 @@ public class Field implements Disposable {
     }
 
 
-    public void raddEntity(Entity e){ entityAdd.add(e); }
+    public void addEntity(Entity e){ entityAdd.add(e); }
     public void removeEntity(Entity e){ entityRemove.add(e); }
 
     public void draw(SpriteBatch batch){

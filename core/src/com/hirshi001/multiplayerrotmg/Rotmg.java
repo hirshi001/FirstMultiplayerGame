@@ -5,16 +5,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Disposable;
 import com.hirshi001.multiplayerrotmg.client.Client;
 import com.hirshi001.multiplayerrotmg.gameadapter.GameApplication;
 import com.hirshi001.multiplayerrotmg.gameadapter.GameApplicationAdapter;
-import com.hirshi001.multiplayerrotmg.registry.DisposableRegistry;
-import com.hirshi001.multiplayerrotmg.registry.EntityRegistry;
-import io.netty.util.internal.StringUtil;
+import com.hirshi001.multiplayerrotmg.registry.registrations.DisposableRegistry;
 
 import java.awt.Dimension;
-import java.util.function.IntPredicate;
 
 public class Rotmg extends ApplicationAdapter {
 	SpriteBatch batch;

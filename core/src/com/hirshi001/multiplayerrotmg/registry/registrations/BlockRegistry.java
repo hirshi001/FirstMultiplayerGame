@@ -1,10 +1,8 @@
-package com.hirshi001.multiplayerrotmg.registry;
+package com.hirshi001.multiplayerrotmg.registry.registrations;
 
 import com.hirshi001.multiplayerrotmg.field.Block;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.hirshi001.multiplayerrotmg.registry.registries.ExpandableRegistry;
+import com.hirshi001.multiplayerrotmg.registry.registries.Registry;
 
 public class BlockRegistry {
 
