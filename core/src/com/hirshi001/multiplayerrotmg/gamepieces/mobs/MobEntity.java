@@ -8,6 +8,7 @@ import com.hirshi001.multiplayerrotmg.gamepieces.items.ItemEntity;
 import com.hirshi001.multiplayerrotmg.gamepieces.projecticles.ProjectileEntity;
 import com.hirshi001.multiplayerrotmg.util.bytewritable.ByteWritableMap;
 import io.netty.buffer.ByteBuf;
+import java.security.SecureRandom;
 
 import java.util.List;
 import java.util.Random;
@@ -197,7 +198,7 @@ public abstract class MobEntity extends BoxEntity {
 
 
     protected void onTouchingEntity(MobEntity e) {
-        Random r = new Random();
+        Random r = new SecureRandom();
         if(e.getCenterPosition().equals(getCenterPosition())){
             getLastPosition().set(getPosition());
             getPosition().add( (r.nextBoolean()?-1:1)*0.00001f,(r.nextBoolean()?-1:1)*0.00001f);
